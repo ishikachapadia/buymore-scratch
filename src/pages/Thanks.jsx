@@ -12,7 +12,7 @@ export default function Thanks() {
           <img src="/thanks.png" alt="Success" className="thankyou-tick" />
           <h1 className="thankyou-title">Thank you, {customerName}!</h1>
           <p className="thankyou-desc">We appreciate the time you took in completing the form, now this is where the fun begins!</p>
-          <button className="thankyou-btn" onClick={() => navigate('/home')}>
+          <button className="thankyou-btn" onClick={() => navigate('/')}>
             CONTINUE
           </button>
         </section>
