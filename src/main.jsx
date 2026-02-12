@@ -5,24 +5,24 @@ import {RouterProvider} from "react-router";
 import './index.css'; 
 import Layout from './components/Layout';
 import Home from './pages/Home';
-// import Legal from './pages/Legal';
-// import Register from './pages/Register';
+import Legal from './pages/Legal';
+import Register from './pages/Register';
 import Login from "./pages/Login";
 import Thanks from "./pages/Thanks";
 // import Result from "./pages/Result";
-// import Contest from "./pages/Contest";
+import Contest from "./pages/Contest";
 
 const router = createBrowserRouter([
   {
     path: "/", Component: Layout,
     children: [
       { index: true, Component: Home },
-      // { path: "legal", Component: Legal },
-      // { path: "register", Component: Register }, 
+      { path: "legal", Component: Legal },
+      { path: "register", Component: Register }, 
       { path: "login", Component: Login },
-      { path: "thanks", Component: Thanks }
+      { path: "thanks", Component: Thanks },
       // { path: "result", Component: Result }, 
-      // { path: "contest", Component: Contest }, 
+      { path: "contest", Component: Contest }
     ],
   },
 ]);
