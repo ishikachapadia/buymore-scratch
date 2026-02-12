@@ -74,7 +74,7 @@ export default function Login() {
                 ) : (
                     <>
                         <h1 className="login-title">HI!</h1>
-                        <p className="login-subtitle">Welcome! Ready to have a chance to win?</p>
+                        <p className="login-subtitle">Welcome! Ready for a chance to win?</p>
                         <form onSubmit={handleLogin} className="login-form">
                             <label className="login-label">Email Address</label>
                             <input type="email" className="login-input" value={fields.email} onChange={(e) => setFields({...fields, email: e.target.value})} required />

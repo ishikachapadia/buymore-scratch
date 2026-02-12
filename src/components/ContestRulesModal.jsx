@@ -7,12 +7,12 @@ export default function ContestRulesModal({ open, onClose }) {
         <h2>Contest Rules</h2>
         <div className="modal-body">
           <ol className="rules-list">
-            <li>Play once every 72 hours.</li>
+            <li>No purchase is necessary to enter or win.</li>
             <li>Must be 16+ or have guardian permission.</li>
-            <li>Fill out the entry form honestly.</li>
-            <li>Winners will be chosen at random, and must answer a skill question.</li>
-            <li>Non-winners get a $2 coupon (on $50+ at Raw-Cabbage-on-a-stick Hut).</li>
-            <li>Contest runs for 3 weeks only.</li>
+            <li>Participants may play every 72 hours.</li>
+            <li>Prizes are awarded at random and subject to availability.</li>
+            <li>Selected winners must correctly answer a skill-testing question to receive their prize.</li>
+            <li>BuyMore Dollars reserves the right to verify eligibility and disqualify any entry that does not comply with these rules.</li>
           </ol>
         </div>
       </div>
