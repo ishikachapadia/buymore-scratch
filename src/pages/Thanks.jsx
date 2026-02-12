@@ -1,17 +1,21 @@
-import React from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-export default function thanks() {
+export default function Thanks() {
   const location = useLocation();
+  const navigate = useNavigate();
   const customerName = location.state?.customerName || 'Customer';
 
   return (
-    <div className="thank-you-page">
-      <h1>Thank You, {customerName}!</h1>
-      <p>Your order has been received and is being processed.</p>
-      <Link to="/" className="home-link-button">
-        Continue Shopping
-      </Link>
-    </div>
+    <main className="thank-you-page">
+        <section className="thankyou-card">
+          <img src="/thanks.png" alt="Success" className="thankyou-tick" />
+          <h1 className="thankyou-title">THANK YOU, {customerName}!</h1>
+          <p className="thankyou-desc">We appreciate the time you took in completing the form, now this is where the fun starts!</p>
+          <button className="thankyou-btn" onClick={() => navigate('/contest')}>
+            CONTINUE
+          </button>
+        </section>
+      </main>
   );
 }

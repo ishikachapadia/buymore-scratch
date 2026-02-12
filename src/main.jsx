@@ -9,8 +9,10 @@ import Legal from './pages/Legal';
 import Register from './pages/Register';
 import Login from "./pages/Login";
 import Thanks from "./pages/Thanks";
-// import Result from "./pages/Result";
 import Contest from "./pages/Contest";
+import Forgot from "./pages/Forgot";
+// import Result from "./pages/Result";
+
 
 const router = createBrowserRouter([
   {
@@ -21,6 +23,7 @@ const router = createBrowserRouter([
       { path: "register", Component: Register }, 
       { path: "login", Component: Login },
       { path: "thanks", Component: Thanks },
+      { path: "forgot", Component: Forgot },
       // { path: "result", Component: Result }, 
       { path: "contest", Component: Contest }
     ],

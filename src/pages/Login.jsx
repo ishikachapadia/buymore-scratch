@@ -62,7 +62,7 @@ export default function Login() {
         setIsRemembered(false);
     };
 
-    // ! we are making it so that if the user is register they will have a welcome back display and if not, a normal log in page that will lead you to registration
+    // ! we are making it so that if the user is registered they will have a welcome back display and if not, a normal log in page that will lead you to registration
     return (
         <section className="login-page">
             <div className="login-box">
@@ -82,6 +82,9 @@ export default function Login() {
                             <label className="login-label">Password</label>
                             <input type="password" className="login-input" value={fields.password} onChange={(e) => setFields({...fields, password: e.target.value})} required />
                             <button type="submit" className="login-btn">Log in</button>
+                            <div className="login-forgot">
+                                <a onClick={() => navigate('/forgot')}>Forgot your password?</a>
+                            </div>
                             {errors.firebase && <span className="error-text">{errors.firebase}</span>}
                         </form>
                         <div className="login-signup">Don't have an account? <a onClick={() => navigate('/register')}>Sign up here.</a></div>

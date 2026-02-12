@@ -1,4 +1,6 @@
 import { useState, useEffect } from 'react';
+import TermsModal from '../components/TermsModal';
+import ContestRulesModal from '../components/ContestRulesModal';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
@@ -56,6 +58,8 @@ function isAtLeast16(dateStr) {
 
 // ! tried to use floaters repo, and the floaters were supposed to represent coins, but it did not look good so i removed it
 export default function Register() {
+    const [showRules, setShowRules] = useState(false);
+    const [showTerms, setShowTerms] = useState(false);
         useEffect(() => {
             let goldBuffer = '';
             let goldTimeout = null;
@@ -312,7 +316,7 @@ export default function Register() {
                 createdAt: new Date().toISOString()
             });
             sessionStorage.setItem('loginGreetName', fields.firstName);
-            navigate('/login');
+            navigate('/thanks', { state: { customerName: fields.firstName } });
         } catch (error) {
             setErrors(prev => ({ ...prev, firebase: error.message }));
             console.log('Firebase error:', error);
@@ -458,8 +462,10 @@ export default function Register() {
                                 <div className="checkbox-group">
                                     <input type="checkbox" id="agreeRules" name="agreeRules" checked={fields.agreeRules} onChange={handleChange} />
                                     <label htmlFor="agreeRules" className="checkbox-label">
-                                        Agree to contest rules and terms and conditions
+                                        Agree to <span className="terms-link" onClick={() => setShowRules(true)}>contest rules</span> and <span className="terms-link" onClick={() => setShowTerms(true)}>terms and conditions</span>
                                     </label>
+                                                        <ContestRulesModal open={showRules} onClose={() => setShowRules(false)} />
+                                            <TermsModal open={showTerms} onClose={() => setShowTerms(false)} />
                                 </div>
                                 <span className="error-text">{errors.agreeRules}</span>
 
@@ -475,7 +481,7 @@ export default function Register() {
                                         Back
                                     </button>
                                     <button type="submit" className="register-button">
-                                        Reveal my prize
+                                        Sign Up
                                     </button>
                                 </div>
                             </>
