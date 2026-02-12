@@ -1,36 +1,4 @@
-/* Gold Easter Egg Theme */
-.gold-easter-egg {
-  --register-bar-gradient: linear-gradient(90deg, #ffe082 0%, #ffd700 60%, #bfa76a 100%) !important;
-  --register-badge-gradient: linear-gradient(272deg, #ffe082 -6.64%, #ffd700 40%, #bfa76a 66.01%) !important;
-  --bg-dark: #3e2c13 !important;
-  --bg-page: linear-gradient(180deg, #bfa76a 0%, #ffd700 100%) !important;
-  --bg-card: #bfa76acc !important;
-  --bg-input: #ffe082 !important;
-  --bg-btn: #ffd700 !important;
-  --bg-footer: #bfa76a !important;
-  --text-white: #ffd700 !important;
-  --text-muted: #ffe082cc !important;
-  --text-dim: #ffe08299 !important;
-  --border-subtle: #ffd70099 !important;
-  --border-input: #ffd700cc !important;
-  --accent-blue: #ffd700 !important;
-  --accent-blue-dark: #bfa76a !important;
-  --accent-blue-light: #ffe082 !important;
-  --error-color: #bfa76a !important;
-  background: var(--bg-page) !important;
-  color: var(--text-white) !important;
-  transition: background 0.7s, color 0.7s;
-}
 
-@keyframes gold-fadeout {
-  0% { opacity: 1; }
-  80% { opacity: 1; }
-  100% { opacity: 0; }
-}
-
-.gold-easter-egg-fade {
-  animation: gold-fadeout 1.5s linear forwards;
-}
 :root {
     --register-bar-gradient: linear-gradient(90deg, #D9D9D9 0%, #4962BC 100%);
     --register-badge-gradient: linear-gradient(272deg, #526ED0 -6.64%, #1E2D63 66.01%);
@@ -612,6 +580,79 @@ background: var(--bg-input);
   text-align: center;
 }
 
+.legal-page {
+  max-width: 800px;
+  margin: 3rem auto 2rem auto;
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.10);
+  padding: 2.5rem 2rem 2rem 2rem;
+}
+.legal-page h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: var(--text-white);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+.legal-page h2 {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+  text-align: center;
+}
+.legal-page div {
+  margin-top: 1.5rem;
+}
+.legal-page p {
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin-bottom: 1.2rem;
+  line-height: 1.7;
+}
+.legal-page strong {
+  color: var(--accent-blue);
+  font-weight: 700;
+}
+.legal-page a {
+  color: var(--accent-blue);
+  text-decoration: underline;
+  word-break: break-all;
+}
+
+.gold-easter-egg {
+  --register-bar-gradient: linear-gradient(90deg, #ffe082 0%, #ffd700 60%, #bfa76a 100%) !important;
+  --register-badge-gradient: linear-gradient(272deg, #ffe082 -6.64%, #ffd700 40%, #bfa76a 66.01%) !important;
+  --bg-dark: #3e2c13 !important;
+  --bg-page: linear-gradient(180deg, #bfa76a 0%, #ffd700 100%) !important;
+  --bg-card: #bfa76acc !important;
+  --bg-input: #ffe082 !important;
+  --bg-btn: #ffd700 !important;
+  --bg-footer: #bfa76a !important;
+  --text-white: #ffd700 !important;
+  --text-muted: #ffe082cc !important;
+  --text-dim: #ffe08299 !important;
+  --border-subtle: #ffd70099 !important;
+  --border-input: #ffd700cc !important;
+  --accent-blue: #ffd700 !important;
+  --accent-blue-dark: #bfa76a !important;
+  --accent-blue-light: #ffe082 !important;
+  --error-color: #bfa76a !important;
+  background: var(--bg-page) !important;
+  color: var(--text-white) !important;
+  transition: background 0.7s, color 0.7s;
+}
+
+@keyframes gold-fadeout {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.gold-easter-egg-fade {
+  animation: gold-fadeout 1.5s linear forwards;
+}
 @media (max-width: 768px) {
   .site-header {
     padding: 1rem 1.5rem;

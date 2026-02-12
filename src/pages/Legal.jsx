@@ -1,55 +1,31 @@
 export default function Legal() {
     return (
-        <section className={styles.legalPage}>
-            <h1 className={styles.title}>Legal Information</h1>
-            <h2 className={styles.subtitle}>Canadian Dairy Photo Contest</h2>
-            <div className={styles.textContainer}>
+        <section className="legal-page">
+            <h1>Legal Information</h1>
+            <h2>Scratch & Win Contest</h2>
+            <div>
+                <p>
+                    Data collection and Usage: By entering the contest, participants agree that personal information that is provided through the website may be collected, stored and used by BuyMore Dollars for purposes related to prize fulfillment, marketing and promotions.
+                    Information collected mahy include, but is not limited to names, contacts, date of birth. The data may be shared with other companies, sponsors and third party services involved in marketing activities. While we take reasonable steps to protect user information, the company is not responsible for how third parties use shared data.
+                    By submitting an entry, users acknowledge that their data may be used to deliver promotiomal offers, advertisements and shared to partners.
 
-                {/* Image Ownership Section */}
-                <p className={styles.paragraph}>
-                    <span className={styles.boldText}>Image Ownership:</span> By submitting a photo to the Canadian Dairy Photo Contest, 
-                    you confirm that you are the creator and owner of the submitted image or that you have all necessary permissions 
-                    from the copyright holder(s) to enter the image in this contest. Upon submission, you transfer all copyright 
-                    of the image to the Canadian Dairy Photo Contest organizers.
                 </p>
-                <p className={styles.paragraph}>
-                    By entering, you grant the contest organizers the right to use, reproduce, distribute, 
-                    display, and modify the image for any purpose, including but not limited to promoting the contest, marketing activities, 
-                    or other uses determined by the organizers. The contest organizers may crop or edit submitted images as needed.
+                <p>
+                   Age requirements:
+                    The contest is for people who are 16+ years old. Participants under the age of 16 may only enter the contest with the permission of a parent or a legal guardian. BuyMore Dollars reserves the right to request proof of age at any time. Entries that do not meet eligibility requirements may be removed without notice and prizes may be forfeited.
+
                 </p>
 
-                {/* Data Usage Section */}
-                <p className={styles.paragraph}>
-                    <span className={styles.boldText}>Data Usage:</span> The personal information we collect from you, including your 
-                    name, address, phone number, email address, and date of birth, 
-                    will only be used to administer the contest, contact winners, and (if you agree) send you promotional materials 
-                    about Canadian dairy products and our sponsors.
-                </p>
-                <p className={styles.paragraph}>
-                    For more information about how your data will be used, refer to our privacy policy.
-                </p>
+                <p>
+                    Chance of winning and prize distribution:
+                    Prizes are awarded through a random draw. The odds of winning depend on the total number of submissions. All selected winners must correctly answer a skill testing question to qualify for the prize. Failure to answer the question correctly will result in disqualification. BuyMore Dollars reserves the right to delay, modify, subsitute or revoke prizes. The prize will be credited to the account of the winner within 6-8 weeks. In the event of discrepancy between the screen and the database, the company’s database will take precedence.
 
-                {/* Age Requirement Section */}
-                <p className={styles.paragraph}>
-                    <span className={styles.boldText}>Age Requirement:</span> You must be 16 years or older
-                    to participate in the Canadian Dairy Photo Contest. If you are under 16, you can still participate, but only with the explicit 
-                    permission and consent of your parent or legal guardian. If a winner is under 16, the prize will be awarded to their parent or guardian.
                 </p>
+                <p>
+                    Promotional communications opt-out  
+                    By entering the contest, participants acknowledge that they may receive communications from the company, including promotional emails, notifications and marketing content related to our products and affiliated partners.
+                    Participants may request to opt out of certain promotional communications at any time. However opting out may not apply to all forms of communations, including prize confirmation, account updates, partner offers, contest updates. As a result, participants may continue to receive some communications. We are not responsible for any missed rewards that may occur as a result of opting out of communications.
 
-                {/* Chances of Winning Section */}
-                <p className={styles.paragraph}>
-                    <span className={styles.boldText}>Chances of Winning and Prize Distribution:</span> Winners will be selected each week in a random 
-                    drawing from all eligible entries received during that week. The number of entries we receive determines your chances of winning. 
-                    Prizes will be awarded as described on the contest entry page. Winners will be notified by email or phone
-                    within 30 days of the drawing. If we can't reach a winner or they don't claim their prize within 30 days, we may choose another winner.
-                </p>
-
-                {/* Opt-Out Section */}
-                <p className={styles.paragraph}>
-                    <span className={styles.boldText}>Opting Out of Promotional Communications:</span> You can choose to stop receiving promotional emails 
-                    or other communications from us at any time. You can do this by checking the appropriate box on the entry form, or by clicking the 
-                    "unsubscribe" link in any promotional email we send. You can also contact us directly at 
-                    <a href="mailto:support@canadiandairy.ca" className={styles.link}> support@canadiandairy.ca</a> to be removed from our mailing list.
                 </p>
 
             </div>
