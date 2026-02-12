@@ -153,7 +153,6 @@ export default function Register() {
             newErrors.confirmPassword = '\u00A0';
         }
 
-        // Phone Number
         if (!hasValueCheck(fields.phone)) {
             newErrors.phone = 'Phone number is required';
             valid = false;
@@ -281,6 +280,7 @@ export default function Register() {
                 agreePromo: fields.agreePromo,
                 createdAt: new Date().toISOString()
             });
+            sessionStorage.setItem('loginGreetName', fields.firstName);
             navigate('/login');
         } catch (error) {
             setErrors(prev => ({ ...prev, firebase: error.message }));
@@ -297,9 +297,8 @@ export default function Register() {
 
 
                     <div className="step-indicator">
-                        <div className={`step-dot ${step >= 1 ? 'active' : ''}`}>1</div>
-                        <div className="step-line"></div>
-                        <div className={`step-dot ${step >= 2 ? 'active' : ''}`}>2</div>
+                        <div className={`step-rect ${step === 1 ? 'active' : ''}`}></div>
+                        <div className={`step-rect ${step === 2 ? 'active' : ''}`}></div>
                     </div>
 
                     <form className="register-form" onSubmit={handleSubmit}>
