@@ -1,8 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { setDoc, doc } from 'firebase/firestore';
 import { auth, db } from '../firebase';
 import { useNavigate } from 'react-router-dom';
+import { useRef } from 'react';
 
 // ! regex validation and checkers
 function hasCharsCheck(value) {
@@ -53,10 +54,40 @@ function isAtLeast16(dateStr) {
     return age >= 16;
 }
 
-
+// ! tried to use floaters repo, and the floaters were supposed to represent coins, but it did not look good so i removed it
 export default function Register() {
+        useEffect(() => {
+            let goldBuffer = '';
+            let goldTimeout = null;
+            function handleGoldKey(e) {
+                goldBuffer += e.key.toLowerCase();
+                if (!'gold'.startsWith(goldBuffer)) {
+                    goldBuffer = e.key.toLowerCase() === 'g' ? 'g' : '';
+                }
+                if (goldBuffer === 'gold') {
+                    goldBuffer = '';
+                    document.body.classList.add('gold-easter-egg');
+                    setTimeout(() => {
+                        document.body.classList.add('gold-easter-egg-fade');
+                        goldTimeout = setTimeout(() => {
+                            document.body.classList.remove('gold-easter-egg');
+                            document.body.classList.remove('gold-easter-egg-fade');
+                        }, 1500);
+                    }, 2000);
+                }
+            }
+            window.addEventListener('keydown', handleGoldKey);
+            return () => {
+                window.removeEventListener('keydown', handleGoldKey);
+                if (goldTimeout) clearTimeout(goldTimeout);
+                document.body.classList.remove('gold-easter-egg');
+                document.body.classList.remove('gold-easter-egg-fade');
+            };
+        }, []);
     const navigate = useNavigate();
     const [step, setStep] = useState(1);
+    const screenRef = useRef(null);
+    const audioRef = useRef(null);
 
     const [fields, setFields] = useState({
         firstName: '',
@@ -288,8 +319,39 @@ export default function Register() {
         }
     }
 
+// ! easter egg 1 (im sorry)
+    useEffect(() => {
+        function handleKeyDown(e) {
+            if (e.key === '6') {
+                window.__sixPressed = true;
+            } else if (e.key === '7' && window.__sixPressed) {
+                window.__sixPressed = false;
+                if (screenRef.current) {
+                    screenRef.current.classList.add('sixseven');
+                    if (audioRef.current) {
+                        audioRef.current.currentTime = 0;
+                        audioRef.current.play();
+                    }
+                    setTimeout(() => {
+                        screenRef.current.classList.remove('sixseven');
+                        if (audioRef.current) {
+                            audioRef.current.pause();
+                            audioRef.current.currentTime = 0;
+                        }
+                    }, 2000);
+                }
+            } else {
+                window.__sixPressed = false;
+            }
+        }
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
+    // ! https://tuna.voicemod.net/sound/be79329a-ecf9-4db3-8dc2-c6e528f6600d
     return (
-        <main className="register-container">
+        <main className="register-container" ref={screenRef}>
+            <audio ref={audioRef} src="/67audio.mp3" preload="auto" />
             <div className="register-wrapper">
                 <section className="register-form-section">
                     <span className="free-entry-badge">FREE ENTRY</span>
