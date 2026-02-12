@@ -1,10 +1,37 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
-import './index.css'
-import App from './App.jsx'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import {createBrowserRouter} from "react-router";
+import {RouterProvider} from "react-router";
+import './index.css'; 
+import Layout from './components/Layout';
+import Home from './pages/Home';
+// import Legal from './pages/Legal';
+// import Register from './pages/Register';
+import Login from "./pages/Login";
+import Thanks from "./pages/Thanks";
+// import Result from "./pages/Result";
+// import Contest from "./pages/Contest";
 
-createRoot(document.getElementById('root')).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+const router = createBrowserRouter([
+  {
+    path: "/", Component: Layout,
+    children: [
+      { index: true, Component: Home },
+      // { path: "legal", Component: Legal },
+      // { path: "register", Component: Register }, 
+      { path: "login", Component: Login },
+      { path: "thanks", Component: Thanks }
+      // { path: "result", Component: Result }, 
+      // { path: "contest", Component: Contest }, 
+    ],
+  },
+]);
+
+const root = document.getElementById("root");
+
+ReactDOM.createRoot(root).render(
+  <RouterProvider router={router} />
 )
+
+
+console.log("Application has started successfully.");
