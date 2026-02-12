@@ -6,22 +6,27 @@ import { useNavigate } from 'react-router-dom';
 
 // ! regex validation and checkers
 function hasCharsCheck(value) {
-    let pat2 = /^[a-zA-Z]+$/;
+    let pat2 = /^[a-zA-Z]+$/;;
     return pat2.test(value.trim());
 }
 
 function hasEmailCheck(value) {
-    let pat2 = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+    let pat2 = /^[a-zA-Z0-9_-]{2,}[.]?[a-zA-Z0-9_-]*[@]{1}[a-zA-Z0-9_-]{2,}[.]{1}(ca|com)$/;
     return pat2.test(value.trim());
 }
 
 function hasPasswordCheck(value) {
-    let pat2 = /^.{6,}$/;
+    let pat2 = /^(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).{8,}$/;
     return pat2.test(value);
 }
 
-function hasPhoneCheck(value) {
-    let pat2 = /^[\d\s\-\+\(\)]{10,}$/;
+function hasPhoneFormatCheck(value) {
+    let pat2 = /^[0-9]{3}[-]?[0-9]{3}[-]?[0-9]{4}$/;
+    return pat2.test(value.trim());
+}
+
+function hasPostalCodeCheck(value) {
+    let pat2 = /^[a-zA-Z]{1}[0-9]{1}[a-zA-Z]{1}[ ]?[0-9]{1}[a-zA-Z]{1}[0-9]{1}$/
     return pat2.test(value.trim());
 }
 
@@ -35,6 +40,17 @@ function hasDateCheck(value) {
 
 function hasCheckedCheck(value) {
     return value === true;
+}
+
+function isAtLeast16(dateStr) {
+    let dob = new Date(dateStr);
+    let today = new Date();
+    let age = today.getFullYear() - dob.getFullYear();
+    let monthDiff = today.getMonth() - dob.getMonth();
+    if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dob.getDate())) {
+        age--;
+    }
+    return age >= 16;
 }
 
 
@@ -80,66 +96,144 @@ export default function Register() {
     function validateStep1() {
         let newErrors = { ...errors };
         let valid = true;
-        if (!hasCharsCheck(fields.firstName)) {
-            newErrors.firstName = 'Please enter a valid first name';
+
+        if (!hasValueCheck(fields.firstName)) {
+            newErrors.firstName = 'First name is required';
             valid = false;
-        } else newErrors.firstName = '\u00A0';
-        if (!hasCharsCheck(fields.lastName)) {
-            newErrors.lastName = 'Please enter a valid last name';
+        } else if (!hasCharsCheck(fields.firstName)) {
+            newErrors.firstName = 'First name can only contain letters';
             valid = false;
-        } else newErrors.lastName = '\u00A0';
-        if (!hasEmailCheck(fields.email)) {
-            newErrors.email = 'Please enter a valid email';
+        } else if (fields.firstName.trim().length < 2) {
+            newErrors.firstName = 'First name must be at least 2 characters';
             valid = false;
-        } else newErrors.email = '\u00A0';
-        if (!hasPasswordCheck(fields.password)) {
-            newErrors.password = 'Password must be at least 6 characters';
+        } else {
+            newErrors.firstName = '\u00A0';
+        }
+
+        if (!hasValueCheck(fields.lastName)) {
+            newErrors.lastName = 'Last name is required';
             valid = false;
-        } else newErrors.password = '\u00A0';
-        if (fields.confirmPassword !== fields.password || fields.confirmPassword.length === 0) {
-            newErrors.confirmPassword = 'Passwords do not match';
+        } else if (!hasCharsCheck(fields.lastName)) {
+            newErrors.lastName = 'Last name can only contain letters';
             valid = false;
-        } else newErrors.confirmPassword = '\u00A0';
-        if (!hasPhoneCheck(fields.phone)) {
+        } else if (fields.lastName.trim().length < 2) {
+            newErrors.lastName = 'Last name must be at least 2 characters';
+            valid = false;
+        } else {
+            newErrors.lastName = '\u00A0';
+        }
+
+        if (!hasValueCheck(fields.email)) {
+            newErrors.email = 'Email address is required';
+            valid = false;
+        } else if (!hasEmailCheck(fields.email)) {
+            newErrors.email = 'Please enter a valid email address';
+            valid = false;
+        } else {
+            newErrors.email = '\u00A0';
+        }
+
+        if (!hasValueCheck(fields.password)) {
+            newErrors.password = 'Password is required';
+            valid = false;
+        } else if (!hasPasswordCheck(fields.password)) {
+            newErrors.password = 'Password must be at least 8 characters and have a capital letter and a symbol';
+            valid = false;
+        } else {
+            newErrors.password = '\u00A0';
+        }
+
+        if (!hasValueCheck(fields.confirmPassword)) {
+            newErrors.confirmPassword = 'Please confirm your password';
+            valid = false;
+        } else if (fields.confirmPassword !== fields.password) {
+            newErrors.confirmPassword = 'Passwords must match';
+            valid = false;
+        } else {
+            newErrors.confirmPassword = '\u00A0';
+        }
+
+        // Phone Number
+        if (!hasValueCheck(fields.phone)) {
+            newErrors.phone = 'Phone number is required';
+            valid = false;
+        } else if (!hasPhoneFormatCheck(fields.phone)) {
             newErrors.phone = 'Please enter a valid phone number';
             valid = false;
-        } else newErrors.phone = '\u00A0';
+        } else if (fields.phone.replace(/\D/g, '').length !== 10) {
+            newErrors.phone = 'Phone number must be 10 digits';
+            valid = false;
+        } else {
+            newErrors.phone = '\u00A0';
+        }
+
         if (!hasDateCheck(fields.dob)) {
             newErrors.dob = 'Date of birth is required';
             valid = false;
-        } else newErrors.dob = '\u00A0';
+        } else if (isNaN(new Date(fields.dob).getTime())) {
+            newErrors.dob = 'Please enter a valid date';
+            valid = false;
+        } else if (!isAtLeast16(fields.dob)) {
+            newErrors.dob = "You must be at least 16 years old to enter without a guardian's permission";
+            valid = false;
+        } else {
+            newErrors.dob = '\u00A0';
+        }
+
         setErrors(newErrors);
         return valid;
     }
 
-    // ! validate only step 2 fields
+    // ! validate step 2 fields
     function validateStep2() {
         let newErrors = { ...errors };
         let valid = true;
+
         if (!hasValueCheck(fields.street)) {
             newErrors.street = 'Street address is required';
             valid = false;
-        } else newErrors.street = '\u00A0';
-        if (!hasCharsCheck(fields.city)) {
-            newErrors.city = 'Please enter a valid city';
+        } else {
+            newErrors.street = '\u00A0';
+        }
+
+        if (!hasValueCheck(fields.city)) {
+            newErrors.city = 'City is required';
             valid = false;
-        } else newErrors.city = '\u00A0';
-        if (!hasCharsCheck(fields.province)) {
-            newErrors.province = 'Please enter a valid province';
+        } else {
+            newErrors.city = '\u00A0';
+        }
+
+        if (!hasValueCheck(fields.province)) {
+            newErrors.province = 'Province is required';
             valid = false;
-        } else newErrors.province = '\u00A0';
+        } else {
+            newErrors.province = '\u00A0';
+        }
+
+        if (!hasValueCheck(fields.country)) {
+            newErrors.country = 'Country is required';
+            valid = false;
+        } else {
+            newErrors.country = '\u00A0';
+        }
+
         if (!hasValueCheck(fields.postalCode)) {
             newErrors.postalCode = 'Postal code is required';
             valid = false;
-        } else newErrors.postalCode = '\u00A0';
-        if (!hasCharsCheck(fields.country)) {
-            newErrors.country = 'Please enter a valid country';
+        } else if (!hasPostalCodeCheck(fields.postalCode)) {
+            newErrors.postalCode = 'Please enter a valid postal code format (A1B 2C4)';
             valid = false;
-        } else newErrors.country = '\u00A0';
+        } else {
+            newErrors.postalCode = '\u00A0';
+        }
+
         if (!hasCheckedCheck(fields.agreeRules)) {
             newErrors.agreeRules = 'You must agree to the contest rules';
             valid = false;
-        } else newErrors.agreeRules = '\u00A0';
+        } else {
+            newErrors.agreeRules = '\u00A0';
+        }
+
         newErrors.firebase = '';
         setErrors(newErrors);
         return valid;
@@ -165,6 +259,7 @@ export default function Register() {
         if (!validateStep2()) {
             return;
         }
+        // ! storing into firebase
         try {
             let userCredential = await createUserWithEmailAndPassword(auth, fields.email, fields.password);
             await updateProfile(userCredential.user, {
@@ -200,7 +295,7 @@ export default function Register() {
                     <span className="free-entry-badge">FREE ENTRY</span>
                     <h2 className="register-title">GET YOUR FREE SCRATCH CARD</h2>
 
-                    {/* Step indicator */}
+
                     <div className="step-indicator">
                         <div className={`step-dot ${step >= 1 ? 'active' : ''}`}>1</div>
                         <div className="step-line"></div>
@@ -210,37 +305,36 @@ export default function Register() {
                     <form className="register-form" onSubmit={handleSubmit}>
                         <span className="error-text">{errors.firebase}</span>
 
-                        {/* ===== STEP 1: Account & Personal Info ===== */}
                         {step === 1 && (
                             <>
                                 <div className="form-row">
                                     <article className="form-group">
                                         <label htmlFor="firstName" className="form-label">First Name</label>
-                                        <input id="firstName" name="firstName" type="text" className={`form-input${errors.firstName !== '\u00A0' ? ' error' : ''}`} value={fields.firstName} onChange={handleChange} />
+                                        <input id="firstName" name="firstName" type="text" placeholder="Your first name" className={`form-input${errors.firstName !== '\u00A0' ? ' error' : ''}`} value={fields.firstName} onChange={handleChange} />
                                         <span className="error-text">{errors.firstName}</span>
                                     </article>
                                     <article className="form-group">
                                         <label htmlFor="lastName" className="form-label">Last Name</label>
-                                        <input id="lastName" name="lastName" type="text" className={`form-input${errors.lastName !== '\u00A0' ? ' error' : ''}`} value={fields.lastName} onChange={handleChange} />
+                                        <input id="lastName" name="lastName" type="text" placeholder="Your last name" className={`form-input${errors.lastName !== '\u00A0' ? ' error' : ''}`} value={fields.lastName} onChange={handleChange} />
                                         <span className="error-text">{errors.lastName}</span>
                                     </article>
                                 </div>
 
                                 <article className="form-group">
                                     <label htmlFor="email" className="form-label">Email Address</label>
-                                    <input id="email" name="email" type="email" className={`form-input${errors.email !== '\u00A0' ? ' error' : ''}`} value={fields.email} onChange={handleChange} />
+                                    <input id="email" name="email" type="email" placeholder="Your email address" className={`form-input${errors.email !== '\u00A0' ? ' error' : ''}`} value={fields.email} onChange={handleChange} />
                                     <span className="error-text">{errors.email}</span>
                                 </article>
 
                                 <div className="form-row">
                                     <article className="form-group">
                                         <label htmlFor="password" className="form-label">Password</label>
-                                        <input id="password" name="password" type="password" className={`form-input${errors.password !== '\u00A0' ? ' error' : ''}`} value={fields.password} onChange={handleChange} />
+                                        <input id="password" name="password" type="password" placeholder="Create a password" className={`form-input${errors.password !== '\u00A0' ? ' error' : ''}`} value={fields.password} onChange={handleChange} />
                                         <span className="error-text">{errors.password}</span>
                                     </article>
                                     <article className="form-group">
                                         <label htmlFor="confirmPassword" className="form-label">Confirm Password</label>
-                                        <input id="confirmPassword" name="confirmPassword" type="password" className={`form-input${errors.confirmPassword !== '\u00A0' ? ' error' : ''}`} value={fields.confirmPassword} onChange={handleChange} />
+                                        <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm your password" className={`form-input${errors.confirmPassword !== '\u00A0' ? ' error' : ''}`} value={fields.confirmPassword} onChange={handleChange} />
                                         <span className="error-text">{errors.confirmPassword}</span>
                                     </article>
                                 </div>
@@ -248,12 +342,12 @@ export default function Register() {
                                 <div className="form-row">
                                     <article className="form-group">
                                         <label htmlFor="phone" className="form-label">Phone Number</label>
-                                        <input id="phone" name="phone" type="tel" className={`form-input${errors.phone !== '\u00A0' ? ' error' : ''}`} value={fields.phone} onChange={handleChange} />
+                                        <input id="phone" name="phone" type="tel" placeholder="Your phone number" className={`form-input${errors.phone !== '\u00A0' ? ' error' : ''}`} value={fields.phone} onChange={handleChange} />
                                         <span className="error-text">{errors.phone}</span>
                                     </article>
                                     <article className="form-group">
                                         <label htmlFor="dob" className="form-label">Date of Birth</label>
-                                        <input id="dob" name="dob" type="date" className={`form-input${errors.dob !== '\u00A0' ? ' error' : ''}`} value={fields.dob} onChange={handleChange} />
+                                        <input id="dob" name="dob" type="date" placeholder="MM / DD / YYYY" className={`form-input${errors.dob !== '\u00A0' ? ' error' : ''}`} value={fields.dob} onChange={handleChange} />
                                         <span className="error-text">{errors.dob}</span>
                                     </article>
                                 </div>
@@ -266,24 +360,23 @@ export default function Register() {
                             </>
                         )}
 
-                        {/* ===== STEP 2: Address & Agreements ===== */}
                         {step === 2 && (
                             <>
                                 <article className="form-group">
                                     <label htmlFor="street" className="form-label">Street Address</label>
-                                    <input id="street" name="street" type="text" className={`form-input${errors.street !== '\u00A0' ? ' error' : ''}`} value={fields.street} onChange={handleChange} />
+                                    <input id="street" name="street" type="text" placeholder="Your street address" className={`form-input${errors.street !== '\u00A0' ? ' error' : ''}`} value={fields.street} onChange={handleChange} />
                                     <span className="error-text">{errors.street}</span>
                                 </article>
 
                                 <div className="form-row">
                                     <article className="form-group">
                                         <label htmlFor="city" className="form-label">City</label>
-                                        <input id="city" name="city" type="text" className={`form-input${errors.city !== '\u00A0' ? ' error' : ''}`} value={fields.city} onChange={handleChange} />
+                                        <input id="city" name="city" type="text" placeholder="Your city" className={`form-input${errors.city !== '\u00A0' ? ' error' : ''}`} value={fields.city} onChange={handleChange} />
                                         <span className="error-text">{errors.city}</span>
                                     </article>
                                     <article className="form-group">
                                         <label htmlFor="province" className="form-label">Province</label>
-                                        <input id="province" name="province" type="text" className={`form-input${errors.province !== '\u00A0' ? ' error' : ''}`} value={fields.province} onChange={handleChange} />
+                                        <input id="province" name="province" type="text" placeholder="Your province" className={`form-input${errors.province !== '\u00A0' ? ' error' : ''}`} value={fields.province} onChange={handleChange} />
                                         <span className="error-text">{errors.province}</span>
                                     </article>
                                 </div>
@@ -291,12 +384,12 @@ export default function Register() {
                                 <div className="form-row">
                                     <article className="form-group">
                                         <label htmlFor="postalCode" className="form-label">Postal Code</label>
-                                        <input id="postalCode" name="postalCode" type="text" className={`form-input${errors.postalCode !== '\u00A0' ? ' error' : ''}`} value={fields.postalCode} onChange={handleChange} />
+                                        <input id="postalCode" name="postalCode" type="text" placeholder="Your postal code" className={`form-input${errors.postalCode !== '\u00A0' ? ' error' : ''}`} value={fields.postalCode} onChange={handleChange} />
                                         <span className="error-text">{errors.postalCode}</span>
                                     </article>
                                     <article className="form-group">
                                         <label htmlFor="country" className="form-label">Country</label>
-                                        <input id="country" name="country" type="text" className={`form-input${errors.country !== '\u00A0' ? ' error' : ''}`} value={fields.country} onChange={handleChange} />
+                                        <input id="country" name="country" type="text" placeholder="Your country" className={`form-input${errors.country !== '\u00A0' ? ' error' : ''}`} value={fields.country} onChange={handleChange} />
                                         <span className="error-text">{errors.country}</span>
                                     </article>
                                 </div>

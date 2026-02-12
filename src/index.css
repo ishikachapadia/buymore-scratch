@@ -234,15 +234,15 @@ body {
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  padding: 1rem 2rem 2rem;
+  padding: 2rem 3rem 3rem;
 }
 
 .register-wrapper {
   width: 100%;
-  max-width: 1100px;
+  max-width: 1200px;
   display: grid;
-  grid-template-columns: 1fr 280px;
-  gap: 2rem;
+  grid-template-columns: 3fr 2fr;
+  gap: 2.5rem;
   align-items: start;
 }
 
@@ -372,6 +372,72 @@ background: #323f6e;
   transform: translateY(0);
 }
 
+/* Step indicator */
+.step-indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 1.5rem;
+}
+
+.step-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 2px solid var(--border-input);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: transparent;
+  transition: all 0.3s;
+}
+
+.step-dot.active {
+  border-color: var(--accent-blue);
+  background: var(--accent-blue);
+  color: #fff;
+}
+
+.step-line {
+  width: 60px;
+  height: 2px;
+  background: var(--border-input);
+}
+
+/* Form buttons row (Back + Submit) */
+.form-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.back-button {
+  flex: 1;
+  padding: 0.85rem 1rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-input);
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--text-white);
+  font-weight: 600;
+  font-family: var(--font-family);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.back-button:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.form-buttons .register-button {
+  flex: 1;
+  margin-top: 0;
+}
+
 .register-link {
   text-align: center;
   margin-top: 1.25rem;
@@ -432,19 +498,20 @@ background: #323f6e;
 }
 
 .prize-section {
-  width: 503px;
-  height: 880px;
-  border-radius: 49px;
+  width: 100%;
+  border-radius: 32px;
   background: #1A223B;
-  box-shadow: 2px 8px 9px 0 rgba(0, 0, 0, 0.45);
-  padding: 1.5rem;
+  box-shadow: 2px 8px 20px 0 rgba(0, 0, 0, 0.35);
+  padding: 2rem 1.5rem;
   border: 1px solid var(--border-subtle);
   text-align: center;
+  position: sticky;
+  top: 2rem;
 }
 
 .prize-title {
   color: #FBFBFB;
-  font-size: 40px;
+  font-size: 1.8rem;
   font-weight: 950;
   margin-bottom: 1rem;
   letter-spacing: 1px;
@@ -452,8 +519,8 @@ background: #323f6e;
 }
 
 .prize-amount-bg {
-  width: 445px;
-  height: 162px;
+  width: 100%;
+  padding: 1rem 0;
   border-radius: 20px;
   background: #263157;
 }
@@ -464,16 +531,16 @@ background: #323f6e;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: Inter;
-  font-size: 95px;
+  font-size: clamp(3rem, 6vw, 5.5rem);
   font-style: normal;
   font-weight: 900;
-  line-height: normal;
+  line-height: 1.1;
 }
 
 .prize-currency {
   color: #E4E4E4;
   text-align: center;
-  font-size: 32px;
+  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -483,29 +550,28 @@ background: #323f6e;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.85rem 1rem;
-width: 445px;
-height: 103px;
-border-radius: 20px;
-background: #202946;
-  margin-top: 1.5rem;
+  padding: 0.85rem 1.2rem;
+  width: 100%;
+  border-radius: 16px;
+  background: #202946;
+  margin-top: 1rem;
 }
 
 .prize-count {
-color: #EDEFF6;
-font-size: 36px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+  color: #EDEFF6;
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .prize-frequency {
-color: #EDEFF6;
-text-align: center;
-font-size: 32px;
-font-style: normal;
-font-weight: 600;
-line-height: normal;
+  color: #EDEFF6;
+  text-align: center;
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 }
 
 .prize-info-texts {
