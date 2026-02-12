@@ -42,10 +42,9 @@ export default function Login() {
             firebase: ''
         });
         try {
-            await signInWithEmailAndPassword(auth, fields.email, fields.password);
-            if (userName) {
-                localStorage.setItem('greetName', userName);
-            }
+            const userCredential = await signInWithEmailAndPassword(auth, fields.email, fields.password);
+            let greet = userCredential.user.displayName;
+            localStorage.setItem('greetName', greet);
             navigate('/contest');
         } catch (err) {
             setErrors({

@@ -250,6 +250,13 @@
   display: block;
 }
 
+.user-img {
+  height: 40px;
+  width: 40px;
+  object-fit: cover;
+  display: block;
+}
+
 :root {
     --register-bar-gradient: linear-gradient(90deg, #D9D9D9 0%, #4962BC 100%);
     --register-badge-gradient: linear-gradient(272deg, #526ED0 -6.64%, #1E2D63 66.01%);

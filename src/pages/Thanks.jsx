@@ -10,9 +10,9 @@ export default function Thanks() {
     <main className="thank-you-page">
         <section className="thankyou-card">
           <img src="/thanks.png" alt="Success" className="thankyou-tick" />
-          <h1 className="thankyou-title">THANK YOU, {customerName}!</h1>
-          <p className="thankyou-desc">We appreciate the time you took in completing the form, now this is where the fun starts!</p>
-          <button className="thankyou-btn" onClick={() => navigate('/contest')}>
+          <h1 className="thankyou-title">Thank you, {customerName}!</h1>
+          <p className="thankyou-desc">We appreciate the time you took in completing the form, now this is where the fun begins!</p>
+          <button className="thankyou-btn" onClick={() => navigate('/home')}>
             CONTINUE
           </button>
         </section>
