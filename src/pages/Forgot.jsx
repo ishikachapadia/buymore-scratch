@@ -28,25 +28,25 @@ export default function Forgot() {
 	return (
 		<section className="login-page forgot-bg">
 			<div className="login-box forgot-box">
-				<div className="forgot-bar"></div>
+				<div className="login-box2">
 				<h2 className="register-title forgot-title">Reset Your Password</h2>
 				<p className="login-subtitle forgot-subtitle">Enter your email address and we'll send you a reset link.</p>
-				<form className="register-form" onSubmit={handleReset}>
+				<form className="register-form" onSubmit={handleReset} noValidate>
 					<article className="form-group">
-						<label className="form-label">Email Address</label>
+						<label className="login-label">Email Address</label>
 						<input
 							type="email"
-							className={`form-input${error ? ' error' : ''}`}
+							className={`login-input${error ? ' error' : ''}`}
 							value={email}
 							onChange={e => setEmail(e.target.value)}
-							required
 						/>
 						{error && <span className="error-text">{error}</span>}
 					</article>
-					<button type="submit" className="register-button forgot-btn">Send Reset Link</button>
+					<button type="submit" className="login-btn forgot-btn">Send Reset Link</button>
 					{msg && <span className="forgot-success">{msg}</span>}
 				</form>
-				<div className="register-link forgot-link">Remembered your password? <a onClick={() => navigate('/login')}>Log in here.</a></div>
+				<div className="login-signup forgot-link">Remembered your password? <a onClick={() => navigate('/login')}>Log in here.</a></div>
+				</div>
 			</div>
 		</section>
 	);

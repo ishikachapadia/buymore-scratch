@@ -3,6 +3,7 @@ export default function ContestRulesModal({ open, onClose }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={e => e.stopPropagation()}>
+       <div className="modal-content-inner">
         <button className="modal-close" onClick={onClose}>&times;</button>
         <h2>Contest Rules</h2>
         <div className="modal-body">
@@ -15,6 +16,7 @@ export default function ContestRulesModal({ open, onClose }) {
             <li>BuyMore Dollars reserves the right to verify eligibility and disqualify any entry that does not comply with these rules.</li>
           </ol>
         </div>
+       </div>
       </div>
     </div>
   );

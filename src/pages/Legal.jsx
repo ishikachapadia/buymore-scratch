@@ -1,6 +1,7 @@
 export default function Legal() {
     return (
         <section className="legal-page">
+          <div className="legal-page-inner">
             <h1>Legal Information</h1>
             <h2>Scratch & Win Contest</h2>
             <div>
@@ -29,6 +30,7 @@ export default function Legal() {
                 </p>
 
             </div>
+          </div>
         </section>
     );
 }

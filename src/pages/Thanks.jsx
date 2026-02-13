@@ -9,12 +9,14 @@ export default function Thanks() {
   return (
     <main className="thank-you-page">
         <section className="thankyou-card">
-          <img src="/thanks.png" alt="Success" className="thankyou-tick" />
+          <div className="thankyou-card-inner">
+          <img src="/scratchwin/images/thanks.png" alt="Success" className="thankyou-tick" />
           <h1 className="thankyou-title">Thank you, {customerName}!</h1>
           <p className="thankyou-desc">We appreciate the time you took in completing the form, now this is where the fun begins!</p>
           <button className="thankyou-btn" onClick={() => navigate('/')}>
             CONTINUE
           </button>
+          </div>
         </section>
       </main>
   );

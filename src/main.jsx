@@ -14,21 +14,26 @@ import Forgot from "./pages/Forgot";
 // import Result from "./pages/Result";
 
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/", Component: Layout,
+      children: [
+        { index: true, Component: Home },
+        { path: "legal", Component: Legal },
+        { path: "register", Component: Register }, 
+        { path: "login", Component: Login },
+        { path: "thanks", Component: Thanks },
+        { path: "forgot", Component: Forgot },
+        { path: "contest", Component: Contest }
+      ],
+    },
+  ],
   {
-    path: "/", Component: Layout,
-    children: [
-      { index: true, Component: Home },
-      { path: "legal", Component: Legal },
-      { path: "register", Component: Register }, 
-      { path: "login", Component: Login },
-      { path: "thanks", Component: Thanks },
-      { path: "forgot", Component: Forgot },
-      // { path: "result", Component: Result }, 
-      { path: "contest", Component: Contest }
-    ],
-  },
-]);
+    basename: "/scratchwin",
+  }
+);
+
 
 const root = document.getElementById("root");
 

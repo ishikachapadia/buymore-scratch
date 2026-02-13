@@ -124,6 +124,7 @@ export default function Register() {
         postalCode: '\u00A0',
         country: '\u00A0',
         agreeRules: '\u00A0',
+        agreePromo: '\u00A0',
         firebase: '',
     });
 
@@ -268,6 +269,13 @@ export default function Register() {
             newErrors.agreeRules = '\u00A0';
         }
 
+        if (!hasCheckedCheck(fields.agreePromo)) {
+            newErrors.agreePromo = 'You must agree to receive promotional emails';
+            valid = false;
+        } else {
+            newErrors.agreePromo = '\u00A0';
+        }
+
         newErrors.firebase = '';
         setErrors(newErrors);
         return valid;
@@ -358,6 +366,7 @@ export default function Register() {
             <audio ref={audioRef} src="/67audio.mp3" preload="auto" />
             <div className="register-wrapper">
                 <section className="register-form-section">
+                  <div className="register-form-section-inner">
                     <span className="free-entry-badge">FREE ENTRY</span>
                     <h2 className="register-title">GET YOUR FREE SCRATCH CARD</h2>
 
@@ -475,6 +484,7 @@ export default function Register() {
                                         Receive promotional emails from BuyMore Dollars
                                     </label>
                                 </div>
+                                <span className="error-text">{errors.agreePromo}</span>
 
                                 <div className="form-buttons">
                                     <button type="button" className="back-button" onClick={() => setStep(1)}>
@@ -491,9 +501,11 @@ export default function Register() {
                     <footer className="register-link">
                         Have an account? <a onClick={() => navigate('/login')}>Log in here</a>
                     </footer>
+                  </div>
                 </section>
 
                 <aside className="prize-section">
+                  <div className="prize-section-inner">
                     <h3 className="prize-title">YOU COULD WIN</h3>
                     <section className="prize-amount-bg">       
                     <div className="prize-amount">10,000</div>
@@ -518,6 +530,7 @@ export default function Register() {
                         <p className="prize-info">Play every 72 hours</p>
                         <p className="prize-info">Easy question to claim your prize!</p>
                     </div>
+                  </div>
                 </aside>
             </div>
         </main>

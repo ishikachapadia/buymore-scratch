@@ -5,6 +5,7 @@ export default function TermsModal({ open, onClose }) {
   return (
     <section className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={e => e.stopPropagation()}>
+       <div className="modal-content-inner">
         <button className="modal-close" onClick={onClose}>&times;</button>
         <h2>Terms and Conditions</h2>
         <div className="modal-body">
@@ -33,6 +34,7 @@ export default function TermsModal({ open, onClose }) {
 
                 </p> <br/>
         </div>
+       </div>
       </div>
     </section>
   );
