@@ -367,8 +367,10 @@ export default function Register() {
             <div className="register-wrapper">
                 <section className="register-form-section">
                   <div className="register-form-section-inner">
-                    <span className="free-entry-badge">FREE ENTRY</span>
-                    <h2 className="register-title">GET YOUR FREE SCRATCH CARD</h2>
+				<div className="login-header">
+                	{/* <img src="/scratchwin/images/companyHead.png" className="login-company1"></img> */}
+                    <img src="/scratchwin/images/registerHead.png" className="register-company"></img>
+               </div>
 
 
                     <div className="step-indicator">
@@ -376,7 +378,7 @@ export default function Register() {
                         <div className={`step-rect ${step === 2 ? 'active' : ''}`}></div>
                     </div>
 
-                    <form className="register-form" onSubmit={handleSubmit}>
+                    <form className="password-form" onSubmit={handleSubmit}>
                         <span className="error-text">{errors.firebase}</span>
 
                         {step === 1 && (

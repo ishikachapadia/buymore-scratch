@@ -151,7 +151,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 2rem;
+  margin-bottom: 20px;
+  margin-top: -30px;
 }
 
 .login-box {
@@ -200,6 +201,18 @@ height:auto;
 
 .login-company3 {
   width: 400px;
+  height: auto;
+  object-fit: contain;
+}
+
+.password-company {
+  width: 450px;
+  height: auto;
+  object-fit: contain;
+}
+
+.register-company {
+  width: 650px;
   height: auto;
   object-fit: contain;
 }
@@ -327,22 +340,22 @@ height:auto;
 }
 
 .register-form-section {
+border: 8px solid #b4b4b4;
+  outline: 2px solid #7a7a7a;
+  
   background: repeating-linear-gradient(
-    90deg,
-    #f1c40f,
-    #f1c40f 16px,
-    #eeb902 16px,
-    #eeb902 32px
-  );
+    45deg,
+    #22cbd3,       
+    #22cbd3 20px, 
+    #4ddbdb 20px,  
+    #4ddbdb 40px);  
   border-radius: 0;
   padding: 1rem;
-  border: none;
   position: relative;
   overflow: visible;
 }
 
 .register-form-section-inner {
-  border: 10px darkgreen dashed;
   padding: 1.5rem;
 }
 
@@ -392,6 +405,15 @@ height:auto;
 
 .form-row .form-group {
   margin-bottom: 0;
+}
+
+.password-form {
+    background: url('/scratchwin/images/passwordScratch.png') no-repeat center/contain, linear-gradient(#c4c4c4, #c4c4c4);
+  background-size: contain;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 1rem;
 }
 
 .form-label {
@@ -1068,10 +1090,21 @@ height:auto;
   background: white;
 }
 .forgot-box {
+  border: 10px solid #f01e9c; 
+  background-color: #a4cc2d; 
+  background-image: radial-gradient(#bed630 30%, transparent 35%);
+  background-size: 40px 40px; 
   position: relative;
   overflow: visible;
-  box-shadow: none;
+  height:auto;
+  padding: 2rem;
+  width: 500px;
+  max-width: 90vw;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
+
 .forgot-bar {
   display: none;
 }
