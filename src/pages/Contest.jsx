@@ -77,7 +77,7 @@ export default function Contest() {
 
   return (
     <div className="contest-page">
-      <h1 className="brand-logo">BUYMORE<span className="cyan-text">$</span></h1>
+      {/* <h1 className="brand-logo">BUYMORE<span className="cyan-text">$</span></h1>
       <div className="status-tag">SCRATCHED: {percentage}%</div>
 
       <div className="scratch-card-container">
@@ -92,7 +92,7 @@ export default function Contest() {
           className={`scratch-canvas ${isFinished ? 'fade-out' : ''}`}
           style={{ touchAction: 'none' }} 
         />
-      </div>
+      </div> */}
     </div>
   );
 }
