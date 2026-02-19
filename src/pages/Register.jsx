@@ -363,7 +363,7 @@ export default function Register() {
     // ! https://tuna.voicemod.net/sound/be79329a-ecf9-4db3-8dc2-c6e528f6600d
     return (
         <main className="register-container" ref={screenRef}>
-            <audio ref={audioRef} src="/67audio.mp3" preload="auto" />
+            <audio ref={audioRef} src="/scratchwin/67audio.mp3" preload="auto" />
             <div className="register-wrapper">
                 <section className="register-form-section">
                   <div className="register-form-section-inner">

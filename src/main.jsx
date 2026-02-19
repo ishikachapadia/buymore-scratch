@@ -11,6 +11,8 @@ import Login from "./pages/Login";
 import Thanks from "./pages/Thanks";
 import Contest from "./pages/Contest";
 import Forgot from "./pages/Forgot";
+import LosePage from "./pages/LosePage";
+import WinPage from "./pages/WinPage";
 // import Result from "./pages/Result";
 
 
@@ -25,7 +27,9 @@ const router = createBrowserRouter(
         { path: "login", Component: Login },
         { path: "thanks", Component: Thanks },
         { path: "forgot", Component: Forgot },
-        { path: "contest", Component: Contest }
+        { path: "contest", Component: Contest },
+        { path: "lose", Component: LosePage },
+        { path: "win", Component: WinPage }
       ],
     },
   ],
