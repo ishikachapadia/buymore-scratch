@@ -1,7 +1,10 @@
 import { Link } from 'react-router-dom';
 import React from "react";
+import { useNavigate } from 'react-router-dom';
 import Sponsors from '../components/sponsors';
 export default function LandingPage() {
+
+      const navigate = useNavigate();
 
     const getTarget = () => {
     try {
@@ -37,8 +40,12 @@ export default function LandingPage() {
       {/* Hero with CTA */}
       <section className="hero pad-y">
         <img src="/scratchwin/images/hero.png" className="hero-img" alt="Hero" />
-        <button className="hero-button hero-play-btn">Play Now!</button>
-      </section>
+<button 
+        className="hero-button hero-play-btn" 
+        onClick={() => navigate('/login')}
+      >
+        Play Now!
+      </button>      </section>
 
       {/* Who are we */}
 <section class="about-us">

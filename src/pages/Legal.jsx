@@ -4,7 +4,8 @@ export default function Legal() {
           <div className="legal-page-inner">
             <h1>Legal Information</h1>
             <h2>Scratch & Win Contest</h2>
-            <div>
+                    <div className="legal-content">
+
                 <p>
                     Data collection and Usage: By entering the contest, participants agree that personal information that is provided through the website may be collected, stored and used by BuyMore Dollars for purposes related to prize fulfillment, marketing and promotions.
                     Information collected may include, but is not limited to names, contacts, date of birth. The data may be shared with other companies, sponsors and third party services involved in marketing activities. While we take reasonable steps to protect user information, the company is not responsible for how third parties use shared data.
