@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { auth } from '../firebase';
 
 function hasEmailCheck(value) {
@@ -63,10 +63,12 @@ export default function Login() {
         }
     };
 
-    const handleLogout = () => {
+    const handleLogout = async () => {
         localStorage.removeItem('greetName');
         setUserName('');
         setIsRemembered(false);
+        await signOut(auth);
+        navigate('/login');
     };
 
     const validateLogin = () => {

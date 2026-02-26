@@ -13,7 +13,7 @@ import Contest from "./pages/Contest";
 import Forgot from "./pages/Forgot";
 import LosePage from "./pages/LosePage";
 import WinPage from "./pages/WinPage";
-// import Result from "./pages/Result";
+import Result from "./pages/Result";
 
 
 const router = createBrowserRouter(
@@ -29,7 +29,8 @@ const router = createBrowserRouter(
         { path: "forgot", Component: Forgot },
         { path: "contest", Component: Contest },
         { path: "lose", Component: LosePage },
-        { path: "win", Component: WinPage }
+        { path: "win", Component: WinPage },
+        { path: "result", Component: Result }
       ],
     },
   ],

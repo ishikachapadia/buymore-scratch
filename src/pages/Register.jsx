@@ -332,33 +332,40 @@ export default function Register() {
     }
 
 // ! easter egg 1 (im sorry)
-    useEffect(() => {
-        function handleKeyDown(e) {
-            if (e.key === '6') {
-                window.__sixPressed = true;
-            } else if (e.key === '7' && window.__sixPressed) {
-                window.__sixPressed = false;
-                if (screenRef.current) {
-                    screenRef.current.classList.add('sixseven');
-                    if (audioRef.current) {
-                        audioRef.current.currentTime = 0;
-                        audioRef.current.play();
-                    }
-                    setTimeout(() => {
-                        screenRef.current.classList.remove('sixseven');
-                        if (audioRef.current) {
-                            audioRef.current.pause();
-                            audioRef.current.currentTime = 0;
-                        }
-                    }, 2000);
+useEffect(() => {
+    let input = ""; // This is our string buffer
+
+    function handleKeyDown(e) {
+        input += e.key.toLowerCase(); // Add the key to the string
+        
+        // --- THIS IS THE REGEX PART ---
+        // It looks for the literal string 'do67' at the end of the input ($)
+        if (/do67$/.test(input)) {
+            input = ""; // Reset the string so it can trigger again
+            
+            if (screenRef.current) {
+                screenRef.current.classList.add('sixseven');
+                if (audioRef.current) {
+                    audioRef.current.currentTime = 0;
+                    audioRef.current.play();
                 }
-            } else {
-                window.__sixPressed = false;
+                setTimeout(() => {
+                    screenRef.current?.classList.remove('sixseven');
+                    if (audioRef.current) {
+                        audioRef.current.pause();
+                        audioRef.current.currentTime = 0;
+                    }
+                }, 2000);
             }
         }
-        window.addEventListener('keydown', handleKeyDown);
-        return () => window.removeEventListener('keydown', handleKeyDown);
-    }, []);
+
+        // Performance safety: don't let the string grow forever
+        if (input.length > 20) input = input.slice(-10);
+    }
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+}, []);
 
     // ! https://tuna.voicemod.net/sound/be79329a-ecf9-4db3-8dc2-c6e528f6600d
     return (

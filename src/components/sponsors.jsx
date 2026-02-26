@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 const Sponsors = () => {
   const [activePanel, setActivePanel] = useState(0);
@@ -35,6 +35,13 @@ const Sponsors = () => {
       img: "/scratchwin/images/shoes.png"
     }
   ];
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setActivePanel(prev => (prev + 1) % sponsorData.length);
+    }, 3000);
+    return () => clearInterval(id);
+  }, []);
 
   return (
     <section className="sponsors-wrapper">

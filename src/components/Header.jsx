@@ -1,7 +1,17 @@
-
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import useCurrentUser from '../hooks/useCurrentUser';
 
 function Header() {
+  const user = useCurrentUser();
+  const navigate = useNavigate();
+
+  const handleContestClick = (e) => {
+    if (!user) {
+      e.preventDefault();
+      navigate('/login');
+    }
+  };
+
   return (
     <header className="site-header">
       <div className="site-logo">
@@ -10,7 +20,8 @@ function Header() {
           </Link>
       </div>
       <nav className="site-nav">
-        <Link to="/contest">CONTEST</Link>
+        <Link to="/references">REFERENCES</Link>
+        <Link to="/contest" onClick={handleContestClick}>CONTEST</Link>
         <Link to="/legal">LEGAL</Link>
         <Link to="/login">            
           <img src="/scratchwin/images/user.png" alt="User Icon" className="user-img" />

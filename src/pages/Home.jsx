@@ -105,7 +105,7 @@ export default function LandingPage() {
         <div className="step-card step-pink">
           <div className="step-number">2</div>
           <h3>SCRATCH</h3>
-          <p>Scratch away at your card and reveal your prize. Yes, it's that easy!.</p>
+          <p>Scratch away at your card and reveal your prize. Yes, it is that easy!</p>
         </div>
 
         {/* STEP 3 */}

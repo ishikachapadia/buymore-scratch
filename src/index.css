@@ -6,8 +6,8 @@
     font-style: normal;
 }
 .logo-img {
-  height: 60px;
-  width: 60px;
+  height: 80px;
+  width: 80px;
   object-fit: cover;
   margin-bottom: 0.3rem;
   display: block;
@@ -63,8 +63,8 @@
 body {
   margin: 0;
   min-width: 320px;
-  min-height: 420px;
-  max-height: 520px;
+  min-height: 100vh;
+  max-height: none;
   height: 100%;
     background-color: white;
 }
@@ -104,14 +104,50 @@ body {
 }
 
 .site-nav a {
-  color: #03593f;
+  color: #03593f; 
   text-decoration: none;
-  font-weight: 700;
-  font-size: 0.95rem;
-  letter-spacing: 0.5px;
-  transition: opacity 0.2s;
+  font-weight: 900;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 8px 16px;
+  
+  /* Start with a slight "inactive" border so the layout doesn't jump */
+  border: 3px solid transparent;
+  border-radius: 12px;
+  
+  /* Use a bouncier bezier for that premium "Feastables" feel */
+  transition: all 0.2s cubic-bezier(0.68, -0.6, 0.32, 1.6);
+  display: inline-block;
 }
 
+/* Individualized rotations so it's not uniform and boring */
+.site-nav a:nth-child(odd):hover {
+  transform: translateY(-5px) rotate(-3deg) scale(1.1);
+}
+
+.site-nav a:nth-child(even):hover {
+  transform: translateY(-5px) rotate(3deg) scale(1.1);
+}
+
+.site-nav a:hover {
+  background-color: #22cbd3; /* Your Cyan */
+  text-decoration: none;
+  color: #000; /* Contrast switch for readability */
+  border: 3px solid #000; /* Solid border */
+  
+  /* Hard shadow with a slight offset increase on hover */
+  box-shadow: 6px 6px 0px #000; 
+  
+  /* Glow effect to make it feel like a "winning" selection */
+  text-shadow: 1px 1px 0px rgba(255,255,255,0.5);
+}
+
+.site-nav a:active {
+  /* Squish down on click */
+  transform: translateY(2px) scale(0.95);
+  box-shadow: 0px 0px 0px #000;
+}
 .site-footer {
   background-color: #F4F4F4; /* Bone White */
   border-top: 8px solid #1A1A1A; /* Solid Dark Anchor */
@@ -301,7 +337,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 40px 20px;
+  padding: 20px 10px;
   font-family: 'Arial Black', sans-serif;
 }
 
@@ -530,24 +566,43 @@ button{
 }
 
 .hero-button {
-  width: 20%;
-  padding: 0.85rem 1rem;
-  font-size: 1rem;
-  border: none;
-  border-radius: var(--radius-md);
-  background: #96d932;
-  color: #03593f;
+  width: 20%; 
+  min-width: 160px; /* Prevents it from looking like a circle if text is long */
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
   font-weight: 900;
   font-family: var(--font-family);
+  text-transform: uppercase;
+  letter-spacing: 1px;
   cursor: pointer;
-  box-shadow: -8px 6px 0 -3px #00000040, 8px 6px 0 -3px #00000040, inset 0 2px 4px #ffffff4d;
-  transition: background 0.3s, transform 0.2s;
+  
+  /* --- The Rounded Fix --- */
+  border-radius: 999px; 
+  background: #96d932;
+  color: #000;
+  border: 4px solid #000;
+  
+  /* Solid block shadow that follows the curve */
+  box-shadow: 0px 8px 0px #000;
+  
+  transition: all 0.1s ease;
   margin-top: 1rem;
+  animation: cta-shake 2.6s ease-in-out infinite;
+  transform-origin: center;
+  display: inline-block;
+  text-align: center;
 }
 
 .hero-button:hover {
   background: #82be29;
-  transform: translateY(-1px);
+  transform: translateY(2px);
+  box-shadow: 0px 5px 0px #000;
+  animation-play-state: paused;
+}
+
+.hero-button:active {
+  transform: translateY(6px);
+  box-shadow: 0px 0px 0px #000;
 }
 
 
@@ -861,6 +916,17 @@ button{
   border-color: rgba(0,0,0,0.2);
 }
 
+/* Emphasize the GRAND PRIZE (10,000) */
+.ticket-item.ticket-yellow {
+  padding: 26px 32px;
+}
+.ticket-yellow .ticket-amount {
+  font-size: clamp(4rem, 10vw, 6.5rem);
+}
+.ticket-yellow .ticket-left, .ticket-yellow .ticket-right {
+  width: 180px;
+}
+
 /* CYAN TIER */
 .ticket-item.ticket-cyan {
   background-color: #22cbd3;
@@ -870,6 +936,16 @@ button{
 .ticket-cyan .ticket-amount {
   -webkit-text-stroke: 2px #000;
   color: #fff;
+  font-size: clamp(2rem, 5.5vw, 3.6rem);
+}
+
+/* Make non-grand tickets a bit more compact */
+.ticket-item.ticket-cyan {
+  padding: 14px 18px;
+}
+.ticket-item.ticket-cyan .ticket-left, 
+.ticket-item.ticket-cyan .ticket-right {
+  width: 120px;
 }
 
 .ticket-amount {
@@ -1198,16 +1274,16 @@ button{
 
 /* Container & Background */
 .sponsors-wrapper {
-  padding: 60px 20px;
+  padding: 40px 16px;
   background: #ffffff;
   font-family: 'Arial Black', sans-serif;
 }
 
 .sponsors-container {
   display: flex;
-  gap: 15px;
-  height: 550px;
-  max-width: 1300px;
+  gap: 12px;
+  height: 460px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -1215,11 +1291,11 @@ button{
 .sponsor-panel {
   display: flex;
   overflow: hidden;
-  border-radius: 35px;
+  border-radius: 26px;
   cursor: pointer;
   transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-  border: 4px solid #000;
-  flex: 0 0 80px; /* Closed width */
+  border: 3px solid #000;
+  flex: 0 0 70px; /* Closed width */
 }
 
 /* Expanded State */
@@ -1230,13 +1306,13 @@ button{
 
 /* Vertical Labels */
 .vertical-label {
-  min-width: 80px;
+  min-width: 70px;
   display: flex;
   align-items: center;
   justify-content: center;
   writing-mode: vertical-rl;
   transform: rotate(180deg);
-  font-size: 1.4rem;
+  font-size: 1.1rem;
   font-weight: 900;
   text-transform: uppercase;
   color: #000;
@@ -1245,10 +1321,10 @@ button{
 
 .panel-content {
   opacity: 0;
-  padding: 40px;
+  padding: 28px;
   /* CHANGE: Use max-width and width instead of a hard min-width */
   width: 100%; 
-  max-width: 900px; 
+  max-width: 780px; 
   display: flex;
   align-items: center;
   transition: opacity 0.3s ease-in-out;
@@ -1263,7 +1339,7 @@ button{
 
 .content-flex {
   display: flex;
-  gap: 40px;
+  gap: 24px;
   align-items: center;
   width: 100%; /* Ensures it fills the panel */
 }
@@ -1276,19 +1352,19 @@ button{
 }
 
 .text-box h2 {
-  font-size: clamp(1rem, 3vw, 2.5rem); /* Responsive sizing */
+  font-size: clamp(0.9rem, 2.3vw, 2rem); /* Responsive sizing */
   line-height: 0.9;
-  margin-bottom: 20px;
+  margin-bottom: 14px;
   text-transform: uppercase;
-  -webkit-text-stroke: 2px black;
+  -webkit-text-stroke: 1.5px black;
   /* ADD THIS: prevents long words from breaking the layout */
   word-wrap: break-word; 
 }
 
 .text-box p {
   font-family: 'Helvetica', sans-serif;
-  font-size: 1.1rem;
-  line-height: 1.4;
+  font-size: 1rem;
+  line-height: 1.35;
   font-weight: bold;
   /* ADD THIS: normalizes text wrapping */
   white-space: normal; 
@@ -1297,13 +1373,13 @@ button{
 /* Ensure the image-box doesn't shrink too much */
 .image-box {
   flex-shrink: 0;
-  width: 50%; /* Relative width works better for wrapping */
-  max-width: 450px;
+  width: 45%; /* Relative width works better for wrapping */
+  max-width: 360px;
   aspect-ratio: 1 / 1;
   background: #eee;
-  border-radius: 25px;
+  border-radius: 20px;
   overflow: hidden;
-  border: 4px solid #000;
+  border: 3px solid #000;
 }
 
 .image-box img {
@@ -1350,11 +1426,11 @@ button{
 .sponsors-title {
   text-align: center;
   font-family: 'Arial Black', sans-serif;
-  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-size: clamp(2rem, 5vw, 3.6rem);
   color: #22cbd3; /* Cyan base */
   text-transform: uppercase;
   letter-spacing: -2px;
-  margin-bottom: 40px;
+  margin-bottom: 28px;
   
   /* The "Feastables" Stacked Shadow */
   text-shadow: 
@@ -1452,6 +1528,7 @@ button{
   font-weight: bold;
 }
 
+
 /* The CTA Button using your Yellow and Green */
 .cta-button {
   position: relative;
@@ -1480,15 +1557,23 @@ button{
 }
 
 .ticker-wrapper {
-  background-color: #ffda00; /* Your bright yellow */
+  background-color: #ffda00; 
   border-top: 4px solid #000;
   border-bottom: 4px solid #000;
   padding: 15px 0;
   overflow: hidden;
   display: flex;
-  /* Slant it like the titles */
+
+  /* FIX: Over-extend the width to hide the rotation gaps */
+  width: 107.35%;         /* 20% wider than the screen */
+  margin-left: -10vw;   /* Pull it back left to keep it centered */
+  
+  /* Keep your style */
   transform: rotate(-1deg) scale(1.05); 
-  margin: 40px 0;
+  margin-top: 40px;
+  margin-bottom: 40px;
+  
+  position: relative;
   z-index: 10;
 }
 
@@ -1503,7 +1588,9 @@ button{
   font-size: 2.5rem;
   color: #000;
   text-transform: uppercase;
-  padding-right: 50px; /* Space between the repeating text */
+  padding-right: 50px;
+  /* Added to match the thick "Super Prize" look */
+  -webkit-text-stroke: 1px #000; 
 }
 
 /* The Animation */
@@ -1624,7 +1711,7 @@ button{
 .step-card p {
   font-family: 'Arial', sans-serif;
   font-weight: 900;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   line-height: 1.2;
 }
 
@@ -1634,11 +1721,14 @@ button{
 .step-yellow { background-color: #ffda00; }
 
 /* Contrast fix for the Yellow card */
-.step-yellow h3, .step-yellow p { 
+.step-yellow h3 { 
   color: #000; 
-  text-shadow: none; 
+  text-shadow: 3px 3px 0px #ffffff;
 }
 
+ .step-yellow p {
+  color: #000;
+}
 /* ... keep your existing steps-section and card styles ... */
 
 .steps-cta-wrapper {
@@ -1664,18 +1754,37 @@ button{
   /* Slight tilt to stay hip */
   transform: rotate(-1deg);
   transition: 0.1s ease;
+  animation: cta-shake 2.2s ease-in-out infinite;
+  transform-origin: center;
 }
 
 .steps-cta-button:hover {
   transform: rotate(0deg) scale(1.05);
   background-color: #8ec11e; /* Changes to Lime on hover */
   color: #fff;
+  animation-play-state: paused;
 }
 
 /* Clicking Effect */
 .steps-cta-button:active {
   transform: translateY(6px) rotate(0deg);
   box-shadow: 0px 4px 0px #000;
+}
+
+@keyframes cta-shake {
+  0% { transform: rotate(-1deg) translateX(0); }
+  8% { transform: rotate(-2.2deg) translateX(-1px); }
+  16% { transform: rotate(1.6deg) translateX(1px); }
+  24% { transform: rotate(-2deg) translateX(-2px); }
+  32% { transform: rotate(1.2deg) translateX(2px); }
+  40% { transform: rotate(-1.2deg) translateX(-1px); }
+  48% { transform: rotate(0.8deg) translateX(1px); }
+  56% { transform: rotate(-0.6deg) translateX(-1px); }
+  64% { transform: rotate(0.4deg) translateX(1px); }
+  72% { transform: rotate(-0.2deg) translateX(0); }
+  80% { transform: rotate(0.6deg) translateX(0); }
+  88% { transform: rotate(-0.4deg) translateX(0); }
+  100% { transform: rotate(-1deg) translateX(0); }
 }
 
 .nav-link{
@@ -1731,6 +1840,116 @@ button{
     transition:none !important;
     scroll-behavior:auto !important;
   }
+}
+
+/* Full screen dimming effect */
+.remember-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px); /* Modern frosted glass look behind the card */
+}
+
+.remember-modal {
+  background: #fff;
+  border: 6px solid #000;
+  padding: 3rem 2rem;
+  width: 450px;
+  max-width: 90vw;
+  text-align: center;
+  box-shadow: 15px 15px 0px #f21197; /* Your Pink Shadow */
+  transform: rotate(-1deg); /* The signature "hand-placed" tilt */
+  position: relative;
+}
+
+/* Add a decorative "Member ID" style tag to the corner */
+.remember-modal::before {
+  content: "SECURITY CHECK";
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  background: #ffda00; /* Ticker Yellow */
+  color: #000;
+  padding: 8px 15px;
+  font-weight: 900;
+  font-size: 0.8rem;
+  border: 3px solid #000;
+  transform: rotate(5deg);
+  box-shadow: 4px 4px 0px #000;
+}
+
+.remember-modal h2 {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 2.2rem;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  color: #000;
+  -webkit-text-stroke: 1px #000;
+}
+
+.remember-modal p {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.remember-modal b {
+  color: #22cbd3; /* Your Cyan for the username */
+  font-weight: 950;
+  text-decoration: underline;
+}
+
+.remember-modal-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Primary "Continue" Button */
+.remember-modal-login {
+  background: #22cbd3; /* Cyan */
+  color: #000;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  padding: 15px;
+  border: 4px solid #000;
+  cursor: pointer;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.1s;
+}
+
+.remember-modal-login:hover {
+  background: #96d932; /* Green hover */
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px #000;
+}
+
+/* Secondary "Switch" Button */
+.remember-modal-switch {
+  background: transparent;
+  color: #000;
+  font-weight: 900;
+  text-transform: uppercase;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  font-size: 0.9rem;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.remember-modal-switch:hover {
+  opacity: 1;
+  color: #f21197; /* Pink hover for the exit action */
 }
 
 
@@ -1807,19 +2026,44 @@ height:auto;
 }
 
 .login-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: var(--text-white);
-  margin: 0;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 3.5rem;
+  line-height: 0.9;
+  color: #000;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+  display: block;
+
+  /* EFFECT: Give the text a solid white "border" so it pops off the stripes */
+  -webkit-text-stroke: 1.5px #000; /* Sharp outline */
+  
+  /* Make it look like a physical badge */
+  background: #fff;
+  padding: 10px 20px;
+  border: 4px solid #000;
+  box-shadow: 8px 8px 0px #000;
+  transform: rotate(-1.5deg);
+  width: fit-content; /* Keeps the background tight to the text */
 }
 
 .login-subtitle {
-  font-size: 1.05rem;
-  color: var(--text-muted);
-  margin: 0 0 0.5rem 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: #fff; /* White text on Cyan */
+  margin: 20px 0 1.5rem 0;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  
+  /* EFFECT: Tape/Label Look */
+  background: #22cbd3; /* Your Cyan */
+  display: inline-block;
+  padding: 8px 15px;
+  border: 3px solid #000;
+  box-shadow: 5px 5px 0px #000;
+  
+  /* Counter-rotate so it stays legible */
 }
-
-
 
 .login-form {
   background: url('/scratchwin/images/scratch.png') no-repeat center/contain, linear-gradient(#c4c4c4, #c4c4c4);
@@ -1870,27 +2114,40 @@ height:auto;
 } 
 .login-btn {
   width: 100%;
-  padding: 0.9rem 1rem;
+  padding: 1rem;
   border-radius: var(--radius-md);
-  background: #96d932;
-  color: #03593f;
-  box-shadow: -8px 6px 0 -3px #00000040, 8px 6px 0 -3px #00000040, inset 0 2px 4px #ffffff4d;
-  font-weight: 900;
-  font-size: 1rem;
+
+  background-color: #e6108f;
+  color: white;
+
   font-family: var(--font-family);
-  border: none;
-  margin-top: 1rem;
+  font-size: 1.1rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  border: 4px solid #000;
   cursor: pointer;
-  transition: background 0.3s, transform 0.2s;
+  position: relative;
+
+  box-shadow: 0px 8px 0px #000;
+
+  transition: all 0.1s ease;
+
+  transform: rotate(-1deg);
 }
 
 .login-btn:hover {
-  background: #82be29;
-  transform: translateY(-1px);
+  background-color: #ffda00;
+  color: black;
+
+  transform: translateY(2px) rotate(0deg);
+  box-shadow: 0px 5px 0px #000;
 }
 
 .login-btn:active {
-  transform: translateY(0);
+  transform: translateY(6px);
+  box-shadow: 0px 0px 0px #000;
 }
 
 .login-signup {
@@ -2053,25 +2310,39 @@ border: 8px solid #b4b4b4;
   width: 100%;
   padding: 0.85rem 1rem;
   font-size: 1rem;
-  border: none;
-  border-radius: var(--radius-md);
-  background: #96d932;
-  color: #03593f;
-  font-weight: 900;
+  background-color: #e6108f;
+  color: white;
+
   font-family: var(--font-family);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  border: 4px solid #000;
+  border-radius: var(--radius-md);
+
   cursor: pointer;
-  box-shadow: -8px 6px 0 -3px #00000040, 8px 6px 0 -3px #00000040, inset 0 2px 4px #ffffff4d;
-  transition: background 0.3s, transform 0.2s;
+  position: relative;
+
+  box-shadow: 0px 8px 0px #000;
+
+  transition: all 0.1s ease;
+
+  transform: rotate(-1deg);
   margin-top: 1rem;
 }
 
 .register-button:hover {
-  background: #82be29;
-  transform: translateY(-1px);
+  background-color: #ffda00;
+  color: black;
+
+  transform: translateY(2px) rotate(0deg);
+  box-shadow: 0px 5px 0px #000;
 }
 
 .register-button:active {
-  transform: translateY(0);
+  transform: translateY(6px);
+  box-shadow: 0px 0px 0px #000;
 }
 
 .step-indicator {
@@ -2185,166 +2456,251 @@ border: 8px solid #b4b4b4;
   display: block;
   min-height: 1.2em;
 }
-
 .prize-section {
   width: 100%;
-  border-radius: 0;
-  background: repeating-linear-gradient(
-    90deg,
-    #f1c40f,
-    #f1c40f 16px,
-    #eeb902 16px,
-    #eeb902 32px
-  );
-  box-shadow: 2px 8px 20px 0 rgba(0, 0, 0, 0.35);
-  padding: 1rem;
-  border: none;
+  background-color: #ffda00; 
+  /* The "Sunburst" effect - makes the yellow look premium */
+  background-image: repeating-conic-gradient(from 0deg, #ffda00 0deg 15deg, #fbc02d 15deg 30deg);
+  border: 6px solid #000;
+  box-shadow: 15px 15px 0px #000;
+  padding: 1.5rem;
   text-align: center;
   position: sticky;
   top: 2rem;
+  transform: rotate(1deg);
+  border-radius: 4px; /* Sharp but slightly softened */
+}
+
+/* Overlapping "Sticker" Badge */
+.prize-section::before {
+  content: "EXCLUSIVE PRIZES";
+  position: absolute;
+  top: -15px;
+  right: -15px;
+  background: #f21197;
+  color: white;
+  padding: 8px 12px;
+  font-weight: 900;
+  font-size: 0.8rem;
+  border: 3px solid #000;
+  transform: rotate(10deg);
+  box-shadow: 4px 4px 0px #000;
+  z-index: 20;
 }
 
 .prize-section-inner {
-  border: 10px darkgreen dashed;
-  padding: 1.5rem;
+  background: #fff;
+  border: 4px solid #000;
+  padding: 2.5rem 1.5rem 1.5rem;
+  position: relative;
+  /* Ticket "Notch" shapes on the sides */
+  mask-image: radial-gradient(circle at 0 50%, transparent 12px, black 13px),
+              radial-gradient(circle at 100% 50%, transparent 12px, black 13px);
+  -webkit-mask-image: radial-gradient(circle at 0 50%, transparent 12px, black 13px),
+                      radial-gradient(circle at 100% 50%, transparent 12px, black 13px);
 }
 
 .prize-title {
-  color: #03593f;
-  font-size: 1.8rem;
-  font-weight: 950;
-  margin-bottom: 1rem;
-  letter-spacing: 1px;
+  color: #000;
+  font-size: 1.6rem;
+  font-weight: 900;
   text-transform: uppercase;
-  font-family: 'Hobo';
+  letter-spacing: 2px;
+  margin-bottom: 0;
+  font-style: italic;
 }
 
 .prize-amount-bg {
   width: 100%;
-  padding: 1rem 0;
-  border-radius: 20px;
-  background: #7dd3d3;
-  border: 2px solid #0099BB;
-  box-shadow: -8px 6px 0 -3px #00000040, 8px 6px 0 -3px #00000040;
+  margin: 1rem 0;
+  padding: 1.5rem 0;
+  background: #22cbd3;
+  border: 4px solid #000;
+  box-shadow: inset 0 -6px 0 rgba(0,0,0,0.1); /* Subtle inner depth */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Adding a "Shine" effect across the prize amount */
+.prize-amount-bg::after {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+  transform: rotate(45deg);
+  animation: prize-shine 4s infinite;
 }
 
 .prize-amount {
-  background: linear-gradient(91deg, #03593f 0.7%, #96d932 95.82%);
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: Inter;
-  font-size: clamp(3rem, 6vw, 5.5rem);
-  font-style: normal;
-  font-weight: 900;
-  line-height: 1.1;
+  color: #fff;
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 950;
+  line-height: 1;
+  text-shadow: 5px 5px 0px #000;
+  position: relative;
+  z-index: 2;
 }
 
 .prize-currency {
-  color: #03593f;
-  text-align: center;
-  font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  color: #000;
+  font-weight: 900;
+  font-size: 1rem;
+  margin-top: 10px;
+  display: block;
 }
 
+/* --- BETTER PRIZE ITEMS (5/week etc) --- */
 .prize-item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.85rem 1.2rem;
-  width: 100%;
-  border-radius: 16px;
-  background: #7dd3d3;
-  border: 2px solid #0099BB;
-  box-shadow: -8px 6px 0 -3px #00000040, 8px 6px 0 -3px #00000040;
-  margin-top: 1rem;
+  padding: 10px 15px;
+  background: #fff;
+  border: 3px solid #000;
+  margin-top: 10px;
+  box-shadow: 4px 4px 0px #000;
+  transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .prize-count {
-  color: #03593f;
-  font-size: clamp(1.4rem, 2.5vw, 2rem);
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  font-weight: 950;
+  font-size: 1.6rem;
+  color: #000;
+  /* Add a little 'x' before the number for style */
+}
+.prize-count::before {
+  content: "x";
+  font-size: 1rem;
+  margin-right: 4px;
+  vertical-align: middle;
 }
 
 .prize-frequency {
-  color: #03593f;
-  text-align: center;
-  font-size: clamp(1.2rem, 2vw, 1.8rem);
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
+  background: #f21197; /* Use your Pink here */
+  color: #fff;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  border: 2px solid #000;
+  border-radius: 50px; /* Capsule shape looks more premium */
+  box-shadow: 2px 2px 0px #000;
 }
 
+/* --- BETTER PRIZE INFO TEXTS --- */
 .prize-info-texts {
-  margin-left: 0.5rem;
   margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 3px dashed #ddd; /* Separator line */
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
-  align-items: flex-start;
+  gap: 12px;
 }
 
 .prize-info {
-  font-size: 20px;
-  color: #03593f;
-  font-weight: 600;
-  letter-spacing: 0.1px;
-  text-align: center;
+  font-size: 0.95rem;
+  color: #444;
+  font-weight: 800;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
 }
 
-.legal-page {
+/* Custom Bullet Points */
+.prize-info::before {
+  content: "✓";
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 22px;
+  height: 22px;
+  background: #96d932; /* Green check circle */
+  color: #000;
+  border: 2px solid #000;
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 900;
+}
+
+/* Special styling for the 'Winners' highlight */
+.prize-info:first-child {
+  color: #000;
+  font-size: 1.05rem;
+}
+.prize-info:first-child::before {
+  background: #ffda00; /* Yellow star for the most important info */
+  content: "★";
+}
+
+/* Subtle Floating Animation for the whole section */
+@keyframes prize-shine {
+  0% { left: -100%; }
+  20%, 100% { left: 100%; }
+}.legal-page {
   max-width: 850px;
   margin: 4rem auto;
-  background-color: #ffda00; /* Solid BuyMore Yellow */
+  background-color: #ffda00; 
   border: 5px solid #000;
-  box-shadow: 12px 12px 0px #22cbd3; /* Cyan Shadow */
-  padding: 10px;
-  transform: rotate(-0.5deg); /* Subtle tilt for "edge" */
+  box-shadow: 12px 12px 0px #000; /* Solid black shadow for that heavy feel */
+  padding: 8px;
+  transform: rotate(-0.5deg);
 }
 
 .legal-page-inner {
   background: #fff;
   border: 4px solid #000;
-  padding: 3rem 2rem;
+  padding: 1.5rem; /* Tightened padding */
+  /* Subtle "Confidential" watermark effect */
+  background-image: repeating-linear-gradient(45deg, #fafafa 0, #fafafa 1px, transparent 0, transparent 50%);
+  background-size: 10px 10px;
 }
 
 .legal-page h1 {
   font-family: 'Arial Black', sans-serif;
   font-size: 2.5rem;
   text-transform: uppercase;
-
-  color: #000000;
-  display: inline-block;
-  padding: 5px 15px;
+  color: #000;
+  line-height: 0.9;
   margin-bottom: 2rem;
+  /* Make the title feel oppressive */
+  letter-spacing: -3px;
 }
 
 .legal-page h2 {
   font-family: 'Arial Black', sans-serif;
-  color: #f21197; /* Pink accent */
-  font-size: 1.2rem;
+  color: #000; /* Ditch the pink, make it look serious */
+  font-size: 0.8rem; /* Uncomfortably small for a heading */
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  background: #ffda00;
+  display: inline-block;
+  padding: 2px 5px;
+  border: 2px solid #000;
+  margin-bottom: 0.5rem;
 }
 
 .legal-content p {
-  font-family: 'Inter', sans-serif; /* Cleaner font for reading */
-  line-height: 1.6;
-  margin-bottom: 1.5rem;
-  color: #333;
-  font-size: 0.95rem;
-  border-bottom: 1px solid #eee;
-  padding-bottom: 1rem;
+  font-family: 'Times New Roman', serif; /* Switch to a cramped serif for "lawyer" vibes */
+  line-height: 1.1; /* Almost no space between lines */
+  margin-bottom: 0.8rem;
+  color: #222;
+  font-size: 0.75rem; /* The "Fine Print" sweet spot */
+  text-align: justify; /* Blocks of text become solid rectangles */
+  letter-spacing: -0.2px;
 }
 
 .legal-content strong {
   color: #000;
   font-weight: 900;
+  text-decoration: underline; /* Makes it look more cluttered */
 }
+
+/* The "Wall of Text" Effect */
+
 .gold-easter-egg {
   --register-bar-gradient: linear-gradient(90deg, #ffe082 0%, #ffd700 60%, #bfa76a 100%) !important;
   --register-badge-gradient: linear-gradient(272deg, #ffe082 -6.64%, #ffd700 40%, #bfa76a 66.01%) !important;
@@ -2367,85 +2723,135 @@ border: 8px solid #b4b4b4;
   color: var(--text-white) !important;
   transition: background 0.7s, color 0.7s;
 }
-
 .thankyou-card {
-  margin: 0 auto;
-  margin-top: 60px;
-  background: repeating-linear-gradient(
-    90deg,
-    #f1c40f,
-    #f1c40f 16px,
-    #eeb902 16px,
-    #eeb902 32px
-  );
-  border-radius: 0;
-  box-shadow: 2px 2px 16px 0 rgba(0,0,0,0.25);
-  width: 700px;
-  max-width: 95vw;
+  margin: 80px auto;
+  background-color: #000; 
+  padding: 10px;
+  /* Thick solid black border */
+  border: 6px solid #000;
+  /* Instead of a floating pink box, make it a hard drop shadow */
+  box-shadow: 20px 20px 0px #f21197; 
+  width: 600px;
+  max-width: 90vw;
+  position: relative;
+  /* Tilted to look like it was thrown onto the table */
+  transform: rotate(-2deg);
+  background-image: repeating-linear-gradient(45deg, #000, #000 10px, #111 10px, #111 20px);
+}
+
+.thankyou-card-inner {
+  background: white;
+  border: 4px solid #000;
+  padding: 3rem 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   position: relative;
-  margin-bottom: 30px;
-  padding: 1rem;
+  /* This creates a lanyard hole at the top */
+  mask-image: radial-gradient(circle at 50% 15px, transparent 10px, black 11px);
+  -webkit-mask-image: radial-gradient(circle at 50% 15px, transparent 10px, black 11px);
 }
 
-.thankyou-card-inner {
-  border: 10px darkgreen dashed;
-  padding: 2rem 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-}
-.thankyou-card::before {
-  display: none;
-}
-.thankyou-tick {
-  width: 140px;
-  height: 140px;
-  margin-bottom: 32px;
-  margin-top: 8px;
-  z-index: 2;
-}
-.thankyou-title {
-  font-family: 'Hobo', 'Inter', Arial, sans-serif;
-  font-size: 3.2rem;
-  color: #03593f;
-  font-weight: 900;
-  margin-top: 0;
-  letter-spacing: 1.5px;
-  text-align: center;
-  z-index: 2;
-}
-.thankyou-desc {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 1.25rem;
-  color: #03593f;
-  text-align: center;
-  margin-bottom: 1.2rem;
-  max-width: 520px;
-  z-index: 2;
-}
-.thankyou-btn {
+/* Make the MEMBER ID badge look like a real sticker */
+.member-badge {
+  position: absolute;
+  top: -25px;
+  left: -30px;
   background: #96d932;
-  color: #03593f;
-  font-family: 'Hobo', 'Inter', Arial, sans-serif;
-  font-size: 1.3rem;
+  color: #000;
+  padding: 10px 20px;
+  font-weight: 950;
+  border: 4px solid #000;
+  transform: rotate(-10deg);
+  box-shadow: 6px 6px 0px #000;
+  font-size: 1.1rem;
+}
+
+.thankyou-title {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 3rem;
+  line-height: 0.85;
+  margin-top: 10px;
+  text-align: center;
+}
+
+.thankyou-title span {
+  color: #f21197;
+  display: block;
+  font-size: 1.2rem;
+  letter-spacing: 5px;
+  -webkit-text-stroke: 0;
+  margin-top: 15px;
+}
+
+.thankyou-tick {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  /* Make the tick look like a gold medal */
+  background: #ffda00;
+  border-radius: 50%;
+  border: 4px solid #000;
+  padding: 15px;
+  box-shadow: 6px 6px 0px #000;
+}
+
+.thankyou-title {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 3.5rem;
+  color: #000;
+  text-transform: uppercase;
+  letter-spacing: -2px;
+  line-height: 0.8;
+  margin-bottom: 10px;
+}
+
+/* The "Welcome to the Club" subtitle */
+.thankyou-title::after {
+  content: "TIME TO WIN BIG";
+  display: block;
+  font-size: 1rem;
+  letter-spacing: 4px;
+  color: #f21197;
+  -webkit-text-stroke: 0;
+  margin-top: 10px;
+}
+
+.thankyou-desc {
+  background: #f0f0f0;
+  padding: 20px;
+  border: 3px dashed #000; /* Perforated "coupon" look */
+  margin: 2rem 0;
   font-weight: 900;
-  border: none;
+  color: #000;
+}
+
+.thankyou-btn {
+  background: #22cbd3; /* Back to Cyan to match Hero */
+  color: #000;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 900;
+  text-transform: uppercase;
+  padding: 18px 50px;
+  border: 4px solid #000;
   border-radius: 12px;
-  box-shadow: -8px 6px 0 -3px #00000040, 8px 6px 0 -3px #00000040, inset 0 2px 4px #ffffff4d;
-  padding: 18px 60px;
+  box-shadow: 6px 6px 0px #000;
   cursor: pointer;
-  letter-spacing: 1px;
-  transition: background 0.2s, transform 0.2s;
-  z-index: 2;
+  transition: all 0.1s ease;
 }
+
 .thankyou-btn:hover {
-  background: #82be29;
-  transform: translateY(-2px) scale(1.03);
+  background: #96d932; /* Swaps to Green on hover like the others */
+  transform: translate(-2px, -2px);
+  box-shadow: 8px 8px 0px #000;
 }
+
+.thankyou-btn:active {
+  transform: translate(2px, 2px);
+  box-shadow: 0px 0px 0px #000;
+}
+
 @keyframes gold-fadeout {
   0% { opacity: 1; }
   80% { opacity: 1; }
@@ -2456,75 +2862,7 @@ border: 8px solid #b4b4b4;
   animation: gold-fadeout 1.5s linear forwards;
 }
 
-.thankyou-bg {
-  flex: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: white;
-  min-height: 100vh;
-  width: 100vw;
-}
-.thankyou-card {
-  background: repeating-linear-gradient(
-    90deg,
-    #f1c40f,
-    #f1c40f 16px,
-    #eeb902 16px,
-    #eeb902 32px
-  );
-  border-radius: 0;
-  box-shadow: 2px 8px 20px 0 rgba(0,0,0,0.18);
-  border: none;
-  padding: 1rem;
-  width: 600px;
-  max-width: 90vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
-  position: relative;
-}
-.thankyou-tick {
-  width: 110px;
-  height: 110px;
-  margin-bottom: 0.5rem;
-  margin-top: 0.5rem;
-}
-.thankyou-title {
-  font-size: 2.5rem;
-  font-weight: 900;
-  color: #03593f;
-  margin: 0 0 0.5rem 0;
-  text-align: center;
-  font-family: 'Hobo';
-}
-.thankyou-desc {
-  font-size: 1.1rem;
-  color: #03593f;
-  text-align: center;
-  margin-bottom: 1.5rem;
-  max-width: 420px;
-}
-.thankyou-btn {
-  width: 100%;
-  padding: 0.9rem 1rem;
-  border-radius: var(--radius-md);
-  background: #96d932;
-  color: #03593f;
-  font-weight: 900;
-  font-size: 1.1rem;
-  font-family: var(--font-family);
-  border: none;
-  margin-top: 1rem;
-  cursor: pointer;
-  box-shadow: -8px 6px 0 -3px #00000040, 8px 6px 0 -3px #00000040, inset 0 2px 4px #ffffff4d;
-  transition: background 0.3s, transform 0.2s;
-}
-.thankyou-btn:hover {
-  background: #82be29;
-  transform: translateY(-1px);
-}
+
 .rules-list {
   margin: 1.2rem 0 1.5rem 1.2rem;
   padding-left: 3rem;
@@ -2821,4 +3159,758 @@ border: 8px solid #b4b4b4;
 .sixseven {
   animation: shake-67 4s cubic-bezier(.17,.67,.83,.99) both;
   will-change: transform;
+}
+
+/* ==============================
+   BuyMore Scratch & Win (CLEAN UI)
+   Paste at the VERY BOTTOM
+============================== */
+
+.bm-page{
+  min-height: 100vh;
+  background: #ffffff;
+  color: #0f172a;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.bm-shell{
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 24px 16px 56px;
+}
+
+.bm-title{
+  font-size: clamp(26px, 4vw, 44px);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  margin: 10px 0 18px;
+}
+
+.bm-text{
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 700;
+  margin: 0;
+}
+
+.bm-card{
+  background: #ffffff;
+  border: 4px solid #000;
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.12);
+}
+
+.bm-card + .bm-card{
+  margin-top: 14px;
+}
+
+/* Contest */
+.bm-contest .bm-scratch{
+  display: grid;
+  gap: 12px;
+}
+
+.bm-canvasWrap{
+  width: 100%;
+  display: grid;
+  place-items: center;
+  padding: 10px;
+  background: #f3f4f6;
+  border: 3px solid #000;
+  border-radius: 14px;
+}
+
+.bm-canvas{
+  border-radius: 10px;
+  touch-action: none;
+  cursor: grab;
+}
+
+/* Locked timer */
+.bm-lock{
+  background: #fff7ed;
+}
+
+.bm-timer{
+  margin-top: 10px;
+  font-size: 28px;
+  font-weight: 1000;
+  letter-spacing: 0.08em;
+}
+
+/* Result page (verification) */
+.bm-result .bm-q{
+  margin-top: 12px;
+  font-size: 34px;
+  font-weight: 1000;
+}
+
+.bm-form{
+  margin-top: 14px;
+  display: grid;
+  gap: 12px;
+  justify-items: center;
+}
+
+.bm-input{
+  width: min(340px, 92vw);
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 3px solid #000;
+  background: #e0f2fe;
+  font-weight: 900;
+  text-align: center;
+  outline: none;
+}
+
+.bm-input:focus{
+  box-shadow: 0 0 0 4px rgba(34,203,211,0.35);
+}
+
+.bm-msg{
+  margin-top: 10px;
+  font-weight: 800;
+}
+
+/* Buttons */
+.bm-btn{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: min(360px, 92vw);
+  padding: 12px 16px;
+  border-radius: 14px;
+  border: 4px solid #000;
+  background: #ffda00;
+  color: #000;
+  font-weight: 1000;
+  cursor: pointer;
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.18);
+  transition: transform 0.12s ease;
+}
+
+.bm-btn:hover{
+  transform: translateY(-1px);
+}
+
+.bm-btn:active{
+  transform: translateY(2px);
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.18);
+}
+
+/* Lose page */
+.bm-lose .bm-card{
+  background: #fff;
+}
+
+.bm-lose .bm-title{
+  color: #f21197;
+}
+
+.bm-coupon{
+  margin-top: 14px;
+  background: #ffda00;
+  border: 4px dashed #000;
+  border-radius: 14px;
+  padding: 14px;
+  font-weight: 1000;
+  text-align: center;
+}
+
+.bm-countdown{
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.bm-timeRow{
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.bm-timeBox{
+  width: 86px;
+  height: 64px;
+  display: grid;
+  place-items: center;
+  border: 4px solid #000;
+  border-radius: 14px;
+  background: #22cbd3;
+  color: #fff;
+  font-weight: 1000;
+  font-size: 22px;
+}
+
+.bm-sep{
+  font-weight: 1000;
+  font-size: 22px;
+}
+
+/* Win page */
+.bm-win{
+  background: #0b1220;
+  color: #fff;
+}
+
+.bm-win .bm-card{
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.22);
+  box-shadow: 0 22px 50px rgba(0,0,0,0.35);
+}
+
+.bm-win .bm-title{
+  color: #ffda00;
+}
+
+.bm-prize{
+  margin-top: 10px;
+  font-size: 40px;
+  font-weight: 1000;
+}
+
+.bm-note{
+  margin-top: 10px;
+  opacity: 0.9;
+  font-weight: 700;
+}
+
+/* Mobile tweaks */
+@media (max-width: 520px){
+  .bm-card{
+    border-width: 3px;
+    border-radius: 16px;
+    box-shadow: 7px 7px 0 rgba(0,0,0,0.12);
+  }
+  .bm-timeBox{
+    width: 74px;
+    height: 58px;
+    font-size: 20px;
+  }
+}
+
+/* ==== Contest page — ticket banner + grid layout ==== */
+.contest-banner {
+  width: 100%;
+  background: #ffda00;
+  border-top: 6px solid #ffc400;
+  padding: 18px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.ticket-band {
+  border: 6px solid #000;
+  box-shadow: 6px 6px 0 #f21197;
+  background: #ffe45c;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: stretch;
+  padding: 15px 25px;
+  max-width: 980px;
+  width: 95%;
+}
+
+.ticket-cell {
+  display: grid;
+  place-items: center;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 900;
+  color: #000;
+  border-left: 5px dashed #000;
+  border-right: 5px dashed #000;
+  padding: 10px;
+}
+
+.ticket-prize { text-align: center; padding: 10px 25px; }
+.ticket-prize .amount {
+  font-family: 'Arial Black', sans-serif;
+  font-size: clamp(2.8rem, 5vw, 4rem);
+  letter-spacing: 2px;
+  color: #000;
+  line-height: 1;
+}
+.ticket-prize .label { 
+  font-family: 'Arial Black', sans-serif;
+  font-weight: 900; 
+  font-size: 1rem;
+  color: #000;
+  margin-top: 5px;
+}
+
+.contest-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  align-items: stretch;
+  padding: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.howto {
+  background: #b9f1f4;
+  border: 8px solid #000;
+  border-radius: 22px;
+  padding: 18px 22px;
+  box-shadow: 8px 8px 0 #000;
+  display: flex;
+  flex-direction: column;
+  min-height: 360px;
+}
+.howto-head {
+  display: inline-block;
+  background: #ffdaea;
+  border: 3px solid #000;
+  padding: 8px 14px;
+  border-radius: 10px;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.1rem;
+  color: #000;
+  margin: 4px 0 14px;
+}
+.howto-text {
+  font-family: 'Arial Black', sans-serif;
+  font-weight: 900;
+  font-size: 1rem;
+  color: #000;
+  line-height: 1.6;
+}
+
+.scratch-card .card-frame {
+  border: 8px solid #f21197;
+  outline: 6px solid #22cbd3;
+  background:
+    radial-gradient(circle at 20% 20%, rgba(255,255,255,0.15) 0 20%, transparent 20%)
+    repeat 0 0 / 40px 40px,
+    #7fdc46;
+  padding: 16px;
+  box-shadow: 10px 10px 0 rgba(0,0,0,0.35);
+  min-height: 360px;
+  display: flex;
+  flex-direction: column;
+}
+.card-head { 
+  text-align: center; 
+  font-family: 'Arial Black', sans-serif;
+  font-weight: 900; 
+  font-size: 1.2rem;
+  color: #000; 
+  margin-bottom: 10px;
+}
+.card-title {
+  display: grid;
+  grid-template-columns: auto auto 1fr;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0 14px;
+}
+.card-title .super { 
+  color: #f21197; 
+  font-family: 'Arial Black', sans-serif; 
+  font-size: 1.5rem; 
+}
+.card-title .prize { 
+  color: #ffda00; 
+  -webkit-text-stroke: 2px #000; 
+  font-family: 'Arial Black', sans-serif; 
+  font-size: 2.4rem; 
+}
+.card-title .burst {
+  background: #fff; 
+  border: 4px solid #000; 
+  border-radius: 50%;
+  padding: 8px; 
+  text-align: center; 
+  width: 80px; 
+  height: 80px;
+  display: grid; 
+  place-items: center; 
+  font-family: 'Arial Black', sans-serif;
+  font-weight: 900;
+  color: #000;
+  font-size: 1rem;
+  line-height: 1.1;
+  box-shadow: 3px 3px 0 rgba(0,0,0,0.3);
+}
+
+.scratch-area { padding: 10px 0 18px; }
+.progress { font-weight: 700; margin-bottom: 8px; color: #000; }
+.canvas-wrap { display: grid; place-items: center; }
+.canvas {
+  width: 340px; height: 210px;
+  border: 6px solid #000;
+  box-shadow: 6px 6px 0 rgba(0,0,0,0.25);
+  background: linear-gradient(#e5e5e5,#c9c9c9);
+}
+
+.lock-box { 
+  text-align: center; 
+  padding: 30px 20px; 
+  border: 6px solid #000; 
+  background: #fff; 
+  margin: 20px;
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
+}
+.lock-title { 
+  font-family: 'Arial Black', sans-serif; 
+  font-size: 1.8rem; 
+  margin-bottom: 12px; 
+  color: #f21197;
+  text-transform: uppercase;
+}
+.lock-timer { 
+  font-weight: 900; 
+  font-size: 1.4rem;
+  color: #000;
+  font-family: 'Arial Black', sans-serif;
+}
+
+@media (max-width: 820px) {
+  .contest-grid { grid-template-columns: 1fr; }
+}
+
+/* ==== Lose Page — new layout ==== */
+.lose-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* Pink loss card */
+.lose-card {
+  background: #f21197;
+  border: 6px solid #000;
+  border-radius: 24px;
+  padding: 30px 40px;
+  text-align: center;
+  margin-bottom: 20px;
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.2);
+  max-width: 500px;
+  width: 100%;
+}
+
+.lose-title {
+  color: #fff;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 2.5rem;
+  margin: 0 0 15px 0;
+  text-transform: uppercase;
+}
+
+.lose-message {
+  color: #fff;
+  font-size: 1rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* Thanks heading */
+.lose-thanks {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.8rem;
+  color: #000;
+  margin: 1px 0;
+  text-transform: uppercase;
+}
+
+/* Coupon ticket */
+.lose-coupon {
+  margin: 20px 0;
+}
+
+.coupon-ticket {
+  display: flex;
+  background: #c4d66e;
+  border: 4px solid #000;
+  border-radius: 12px;
+  overflow: hidden;
+  max-width: 400px;
+}
+
+.coupon-left {
+  flex: 2;
+  padding: 20px;
+  background: #f5f5dc;
+  border-right: 3px dashed #000;
+}
+
+.coupon-amount {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 2.2rem;
+  color: #c4d66e;
+  -webkit-text-stroke: 2px #000;
+  text-shadow: 2px 2px 0 #000;
+}
+
+.coupon-merchant {
+  font-size: 0.9rem;
+  color: #666;
+  margin-top: 5px;
+}
+
+.coupon-right {
+  flex: 1;
+  padding: 20px;
+  background: #f5f5dc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.coupon-expires {
+  font-size: 0.8rem;
+  color: #666;
+  text-align: center;
+  font-weight: 700;
+}
+
+/* Come back heading */
+.lose-comeback {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.6rem;
+  color: #000;
+  margin: 20px 0 15px;
+  text-transform: uppercase;
+}
+
+/* Timer */
+.lose-timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.timer-box {
+  width: 70px;
+  height: 70px;
+  background: #22cbd3;
+  border: 4px solid #000;
+  border-radius: 12px;
+  display: grid;
+  place-items: center;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.4rem;
+  color: #000;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+}
+
+.timer-box-last {
+  background: #ffda00;
+}
+
+.timer-sep {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.5rem;
+  color: #000;
+}
+
+/* Go Back button */
+.lose-back-btn {
+  background: #ffda00;
+  border: 4px solid #000;
+  border-radius: 30px;
+  padding: 15px 50px;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.3rem;
+  color: #000;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 rgba(0,0,0,0.2);
+  text-transform: uppercase;
+}
+
+.lose-back-btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+}
+
+/* ==== Win Page — gold coin design ==== */
+.win-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #a08020 0%, #8b6914 100%);
+  padding: 20px;
+}
+
+/* Gold coin */
+.win-coin {
+  width: 280px;
+  height: 280px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, #ffd54f 0%, #ffb300 30%, #ff8f00 70%, #f57f17 100%);
+  box-shadow:
+    0 0 0 15px #ffecb3,
+    0 0 0 20px #ffca28,
+    0 20px 60px rgba(0,0,0,0.5),
+    inset -10px -10px 30px rgba(0,0,0,0.1),
+    inset 10px 10px 30px rgba(255,255,255,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.win-coin::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: repeating-conic-gradient(
+    from 0deg,
+    rgba(255,255,255,0.1) 0deg 10deg,
+    transparent 10deg 20deg
+  );
+}
+
+.coin-inner {
+  text-align: center;
+  z-index: 1;
+}
+
+.win-text {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.3rem;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  margin-bottom: 5px;
+}
+
+.win-amount {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 2.2rem;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Play Again button */
+.win-play-btn {
+  background: #4caf50;
+  border: 4px solid #2e7d32;
+  border-radius: 12px;
+  padding: 15px 50px;
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.4rem;
+  color: #fff;
+  cursor: pointer;
+  box-shadow: 0 6px 0 #1b5e20, 0 8px 20px rgba(0,0,0,0.3);
+  transition: transform 0.1s, box-shadow 0.1s;
+}
+
+.win-play-btn:hover {
+  transform: translateY(2px);
+  box-shadow: 0 4px 0 #1b5e20, 0 6px 15px rgba(0,0,0,0.3);
+}
+
+.win-play-btn:active {
+  transform: translateY(6px);
+  box-shadow: 0 0 0 #1b5e20, 0 2px 10px rgba(0,0,0,0.3);
+}
+
+/* ==== Party Mode for $10,000 win ==== */
+.win-page-party {
+  background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #ff1493 100%);
+  animation: partyBackground 3s ease infinite;
+}
+
+@keyframes partyBackground {
+  0%, 100% { background: linear-gradient(135deg, #ffd700 0%, #ff8c00 50%, #ff1493 100%); }
+  50% { background: linear-gradient(135deg, #ff1493 0%, #ffd700 50%, #ff8c00 100%); }
+}
+
+/* Confetti */
+.confetti-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1000;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  top: -10px;
+  animation: confetti-fall linear infinite;
+}
+
+@keyframes confetti-fall {
+  0% {
+    transform: translateY(-10px) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(720deg);
+    opacity: 0;
+  }
+}
+
+/* Grand Prize coin - bigger with pulse */
+.win-coin-grand {
+  width: 320px;
+  height: 320px;
+  animation: coinPulse 1.5s ease infinite;
+}
+
+@keyframes coinPulse {
+  0%, 100% { transform: scale(1); box-shadow: 0 0 0 15px #ffecb3, 0 0 0 20px #ffca28, 0 20px 60px rgba(0,0,0,0.5), 0 0 30px rgba(255,215,0,0.6); }
+  50% { transform: scale(1.05); box-shadow: 0 0 0 15px #ffecb3, 0 0 0 20px #ffca28, 0 30px 80px rgba(0,0,0,0.6), 0 0 50px rgba(255,215,0,0.8); }
+}
+
+.win-subtext {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1rem;
+  color: #fff;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+  margin-top: 5px;
+}
+
+/* Win page timer */
+.win-timer-section {
+  margin: 30px 0;
+  text-align: center;
+}
+
+.win-timer-title {
+  font-family: 'Arial Black', sans-serif;
+  font-size: 1.4rem;
+  color: #fff;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.win-timer {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* ==== Result page error message ==== */
+.bm-msg-error {
+  color: #ff0000 !important;
+  font-size: 1.4rem !important;
+  font-weight: 900;
+  font-family: 'Arial Black', sans-serif;
+  text-align: center;
+  margin-top: 60px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }

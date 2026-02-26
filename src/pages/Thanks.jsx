@@ -10,11 +10,10 @@ export default function Thanks() {
     <main className="thank-you-page">
         <section className="thankyou-card">
           <div className="thankyou-card-inner">
-          <img src="/scratchwin/images/thanks.png" alt="Success" className="thankyou-tick" />
           <h1 className="thankyou-title">Thank you, {customerName}!</h1>
           <p className="thankyou-desc">We appreciate the time you took in completing the form, now this is where the fun begins!</p>
-          <button className="thankyou-btn" onClick={() => navigate('/')}>
-            CONTINUE
+          <button className="thankyou-btn" onClick={() => navigate('/contest')}>
+            LET'S PLAY!
           </button>
           </div>
         </section>
