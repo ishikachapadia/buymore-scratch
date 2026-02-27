@@ -27,7 +27,6 @@ export default function Legal() {
                     Promotional communications opt-out  
                     By entering the contest, participants acknowledge that they may receive communications from the company, including promotional emails, notifications and marketing content related to our products and affiliated partners.
                     Participants may request to opt out of certain promotional communications at any time. However opting out may not apply to all forms of communications, including prize confirmation, account updates, partner offers, contest updates. As a result, participants may continue to receive some communications. We are not responsible for any missed rewards that may occur as a result of opting out of communications.
-
                 </p>
 
             </div>

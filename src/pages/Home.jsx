@@ -13,7 +13,7 @@ export default function LandingPage() {
         if (!isNaN(d)) return d;
       }
     } catch {}
-    return new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    return new Date(Date.now() + 21 * 24 * 60 * 60 * 1000);
   };
 
   const calc = (end) => {
@@ -117,8 +117,9 @@ export default function LandingPage() {
       </div>
 
       <div className="steps-cta-wrapper">
-        <button className="steps-cta-button">
-          PLAY NOW ➔
+        <button className="steps-cta-button"         onClick={() => navigate('/login')}
+>
+          WIN BIG NOW!
         </button>
       </div>
     </section>
@@ -225,7 +226,8 @@ export default function LandingPage() {
       
     </div>
 <div className="cta-wrapper">
-  <button className="main-cta-btn">
+  <button className="main-cta-btn"        onClick={() => navigate('/login')}
+>
  LET'S GO!
   </button>
 </div>

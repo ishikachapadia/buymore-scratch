@@ -21,8 +21,10 @@ function Header() {
       </div>
       <nav className="site-nav">
         <Link to="/references">REFERENCES</Link>
-        <Link to="/contest" onClick={handleContestClick}>CONTEST</Link>
         <Link to="/legal">LEGAL</Link>
+        {user && (
+          <Link to="/contest" onClick={handleContestClick}>CONTEST</Link>
+        )}
         <Link to="/login">            
           <img src="/scratchwin/images/user.png" alt="User Icon" className="user-img" />
         </Link>

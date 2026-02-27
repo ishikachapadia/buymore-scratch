@@ -20,25 +20,32 @@ function formatDHMS(ms) {
 
 // Simple confetti component
 function Confetti() {
-  const pieces = Array.from({ length: 50 }, (_, i) => ({
+  const pieces = Array.from({ length: 80 }, (_, i) => ({
     id: i,
     left: Math.random() * 100,
-    delay: Math.random() * 2,
-    duration: 2 + Math.random() * 2,
-    color: ['#ff0000', '#00ff00', '#0000ff', '#ffff00', '#ff00ff', '#00ffff'][Math.floor(Math.random() * 6)]
+    delay: Math.random() * 3,
+    duration: 3 + Math.random() * 3,
+    // Using your brand colors: Cyan, Pink, Lime, Yellow, White
+    color: ['#22cbd3', '#f21197', '#a8d823', '#ffda00', '#ffffff'][Math.floor(Math.random() * 5)],
+    width: 8 + Math.random() * 12 + 'px',
+    height: 5 + Math.random() * 10 + 'px',
+    rotation: Math.random() * 360 + 'deg'
   }));
 
   return (
     <div className="confetti-container">
-      {pieces.map(p => (
+      {pieces.map((p) => (
         <div
           key={p.id}
           className="confetti-piece"
           style={{
-            left: `${p.left}%`,
-            animationDelay: `${p.delay}s`,
-            animationDuration: `${p.duration}s`,
-            backgroundColor: p.color
+            left: p.left + '%',
+            backgroundColor: p.color,
+            width: p.width,
+            height: p.height,
+            animationDelay: p.delay + 's',
+            animationDuration: p.duration + 's',
+            transform: `rotate(${p.rotation})`
           }}
         />
       ))}
@@ -46,14 +53,18 @@ function Confetti() {
   );
 }
 
+
+
 export default function WinPage() {
   const navigate = useNavigate();
   const [prize, setPrize] = useState(0);
-  const [isGrandPrize, setIsGrandPrize] = useState(false);
+  // const [isGrandPrize, setIsGrandPrize] = useState(false);
   const [timeLeft, setTimeLeft] = useState(0);
 
+  const [winTime, setWinTime] = useState(null);
   useEffect(() => {
     const raw = localStorage.getItem(OUTCOME_KEY);
+    const last = localStorage.getItem(LAST_PLAY_KEY);
     if (!raw) {
       navigate("/contest");
       return;
@@ -65,59 +76,62 @@ export default function WinPage() {
         return;
       }
       setPrize(o.prize || 0);
-      setIsGrandPrize(o.prize === 10000);
+      // setIsGrandPrize(o.prize === 10000);
+      if (last) setWinTime(new Date(Number(last)));
     } catch {
       navigate("/contest");
     }
   }, [navigate]);
 
   // Countdown timer
-  useEffect(() => {
-    const tick = () => {
-      const last = Number(localStorage.getItem(LAST_PLAY_KEY) || "0");
-      const diff = Date.now() - last;
-      const remaining = Math.max(0, COOLDOWN_MS - diff);
-      setTimeLeft(remaining);
-    };
-
-    tick();
-    const t = setInterval(tick, 1000);
-    return () => clearInterval(t);
-  }, []);
-
-  const time = formatDHMS(timeLeft);
-
   return (
-    <div className={`win-page ${isGrandPrize ? 'win-page-party' : ''}`}>
-      {isGrandPrize && <Confetti />}
-      
-      {/* Gold coin with prize */}
-      <div className={`win-coin ${isGrandPrize ? 'win-coin-grand' : ''}`}>
-        <div className="coin-inner">
-          <div className="win-text">{isGrandPrize ? '🎉 GRAND PRIZE 🎉' : 'You just won'}</div>
-          <div className="win-amount">${Number(prize).toLocaleString()}</div>
-          {isGrandPrize && <div className="win-subtext">BUYMORE DOLLARS</div>}
-        </div>
-      </div>
+    <div className="win-page-final win-page-party">
+      <Confetti />
+      {/* The "Exploding" Header */}
+      <div className="bm-result-title">SUCCESS!</div>
 
-      {/* Come back timer */}
-      <div className="win-timer-section">
-        <h3 className="win-timer-title">COME BACK IN</h3>
-        <div className="win-timer">
-          <div className="timer-box">{time.days}</div>
-          <div className="timer-sep">:</div>
-          <div className="timer-box">{pad(time.hours)}</div>
-          <div className="timer-sep">:</div>
-          <div className="timer-box">{pad(time.mins)}</div>
-          <div className="timer-sep">:</div>
-          <div className="timer-box timer-box-last">{pad(time.secs)}</div>
+      <div className="bm-shell">
+        {/* Prize Visual Section */}
+        <div className="win-coin-card">
+          <div className="win-badge">VERIFIED WINNER</div>
+          <img
+            src={
+              prize === 20 ? "/scratchwin/images/20.png"
+              : prize === 100 ? "/scratchwin/images/100.png"
+              : prize === 750 ? "/scratchwin/images/750.png"
+              : prize === 10000 ? "/scratchwin/images/10000.png"
+              : ""
+            }
+            alt={`You won ${prize} BuyMore Dollars`}
+            className="final-prize-img"
+          />
         </div>
-      </div>
 
-      {/* Play Again button */}
-      <button className="win-play-btn" onClick={() => navigate("/contest")}>
-        {isGrandPrize ? 'PLAY AGAIN 🎊' : 'Play Again'}
-      </button>
+        {/* Message Section */}
+        <div className="win-message-section">
+          <h2 className="win-status-title">CONGRATULATIONS!</h2>
+          <p className="win-congrats-text">
+            Your skill-testing question was answered correctly. 
+            Your <strong>BuyMore Dollars</strong> will be credited to your account within:
+          </p>
+          <div className="delivery-window">6 TO 8 WEEKS</div>
+          {winTime && (
+            <div className="win-timestamp">
+              WIN DATE: {winTime.toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })}
+            </div>
+          )}
+        </div>
+
+        {/* Final Navigation */}
+        <button className="bm-btn win-play-btn" onClick={() => navigate("/")}>
+          GO BACK TO HOME
+        </button>
+      </div>
     </div>
+
+   
+
+      
+
   );
 }

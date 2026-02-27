@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const LAST_PLAY_KEY = "bm_last_play_ts";
-const COOLDOWN_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+const COOLDOWN_MS = 72 * 60 * 60 * 1000; // 72 hours (match Contest page)
 
 function pad(n) {
   return String(n).padStart(2, "0");
@@ -37,34 +37,25 @@ export default function LosePage() {
   const time = formatDHMS(left);
 
   const goBack = () => {
-    if (left <= 0) navigate("/contest");
-    else navigate("/home");
+navigate("/");
   };
 
   return (
     <div className="lose-page">
       {/* Pink loss card */}
       <div className="lose-card">
-        <h1 className="lose-title">Oh no, you lost...</h1>
+        <h1 className="lose-title">Aw, better luck next time..</h1>
         <p className="lose-message">
           It's not over yet, you can try again. But you will miss out on getting life-changing prizes, if you didn't play again soon.
         </p>
       </div>
 
       {/* Thanks heading */}
-      <h2 className="lose-thanks">THANKS FOR PLAYING, HERE'S A GIFT</h2>
+      <h2 className="lose-thanks">BUT DON'T LEAVE EMPTY HANDED!</h2>
 
       {/* Coupon image */}
       <div className="lose-coupon">
-        <div className="coupon-ticket">
-          <div className="coupon-left">
-            <div className="coupon-amount">$2 OFF</div>
-            <div className="coupon-merchant">Raw-Cabbage-on-a-stick Hut</div>
-          </div>
-          <div className="coupon-right">
-            <div className="coupon-expires">EXPIRES ON 2/30/26</div>
-          </div>
-        </div>
+<img src="/scratchwin/images/coupon.png" alt="Better luck next time coupon"  />
       </div>
 
       {/* Countdown */}
@@ -82,7 +73,7 @@ export default function LosePage() {
 
       {/* Go Back button */}
       <button className="lose-back-btn" onClick={goBack}>
-        GO BACK
+        GO BACK TO HOME
       </button>
     </div>
   );

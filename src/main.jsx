@@ -1,4 +1,5 @@
 import React from 'react';
+import ScrollToTop from './ScrollToTop';
 import ReactDOM from 'react-dom/client';
 import {createBrowserRouter} from "react-router";
 import {RouterProvider} from "react-router";
@@ -14,7 +15,7 @@ import Forgot from "./pages/Forgot";
 import LosePage from "./pages/LosePage";
 import WinPage from "./pages/WinPage";
 import Result from "./pages/Result";
-
+import References from "./pages/Reference";
 
 const router = createBrowserRouter(
   [
@@ -30,7 +31,8 @@ const router = createBrowserRouter(
         { path: "contest", Component: Contest },
         { path: "lose", Component: LosePage },
         { path: "win", Component: WinPage },
-        { path: "result", Component: Result }
+        { path: "result", Component: Result },
+        { path: "references", Component: References }
       ],
     },
   ],

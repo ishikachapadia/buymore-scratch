@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import ScrollToTop from '../ScrollToTop';
 import { Outlet, useNavigate } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
@@ -37,7 +38,9 @@ export default function Layout() {
         open={showModal}
       />
       <main className="page-content">
-        <Outlet /> 
+        <ScrollToTop>
+          <Outlet />
+        </ScrollToTop>
       </main>
       <Footer />
     </section>
