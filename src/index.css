@@ -149,6 +149,43 @@ body {
   transform: translateY(2px) scale(0.95);
   box-shadow: 0px 0px 0px #000;
 }
+@media (max-width: 768px) {
+  .site-header {
+    flex-direction: column; /* Stack logo over nav */
+    gap: 1rem;
+    padding: 1rem;
+  }
+
+  .site-logo {
+    font-size: 1.3rem; /* Make the brand pop more */
+    text-align: center;
+  }
+
+  .site-nav {
+    width: 100%;
+    justify-content: center;
+    gap: 0.5rem; /* Tighten gap for small screens */
+    flex-wrap: wrap; /* Let links wrap if they are long */
+  }
+
+  .site-nav a {
+    font-size: 0.85rem;
+    padding: 6px 10px;
+    border-width: 2px; /* Thinner border for smaller screens */
+  }
+
+  /* Disable complex rotations on mobile to prevent layout jitter 
+     and focus on the color change/active state instead */
+  .site-nav a:nth-child(odd):hover,
+  .site-nav a:nth-child(even):hover {
+    transform: translateY(-2px) scale(1.05); /* Simpler lift */
+    rotate: 0deg; 
+  }
+
+  .site-nav a:hover {
+    box-shadow: 3px 3px 0px #000; /* Smaller shadow */
+  }
+}
 .site-footer {
   background-color: #F4F4F4; /* Bone White */
   border-top: 8px solid #1A1A1A; /* Solid Dark Anchor */
@@ -883,8 +920,11 @@ button{
 /* Contrast fix for Yellow amount */
 .ticket-yellow .ticket-amount {
   color: #000;
+  padding-bottom:12px;
   -webkit-text-stroke: 0px;
 }
+
+
 /* ... keep section and ticket-item styles from previous ... */
 
 .ticket-item {
@@ -968,6 +1008,58 @@ button{
 .ticket-left { border-right: 4px dashed rgba(0,0,0,0.3); }
 .ticket-right { border-left: 4px dashed rgba(0,0,0,0.3); }
 
+@media (max-width: 768px) {
+  .ticket-stack {
+    gap: 30px; /* More breathing room between tickets */
+    padding: 0 10px;
+  }
+
+  .ticket-item {
+    flex-direction: column; /* Stack the stub, center, and end vertically */
+    min-height: auto;
+    text-align: center;
+    box-shadow: 8px 8px 0px #000; /* Slightly smaller shadow for mobile */
+    transform: none !important; /* Remove the tilt for better scrolling */
+  }
+
+  /* Make the side stubs full width and thinner */
+  .ticket-left, 
+  .ticket-right {
+    width: 100% !important;
+    padding: 10px;
+    font-size: 0.75rem;
+  }
+
+  /* Change dashed lines from vertical to horizontal */
+  .ticket-left {
+    border-right: none;
+    border-bottom: 4px dashed rgba(0,0,0,0.2);
+  }
+
+  .ticket-right {
+    border-left: none;
+    border-top: 4px dashed rgba(0,0,0,0.2);
+  }
+
+  .ticket-center {
+    padding: 30px 15px;
+  }
+
+  /* Adjust font sizes so they don't break the container */
+  .ticket-amount {
+    font-size: 3.5rem !important; /* Force a legible size on mobile */
+    -webkit-text-stroke: 1px #000; /* Thinner stroke for smaller text */
+  }
+
+  .ticket-yellow .ticket-amount {
+    font-size: 4.5rem !important; /* Keep the grand prize slightly larger */
+  }
+
+  /* Disable the hover "Slide" effect as it feels glitchy on touch */
+  .ticket-item:hover {
+    transform: scale(1.02);
+  }
+}
 /* Zig-zag ticket edges using a mask or pseudo-elements can be complex, 
    so we keep it "brutal" with hard rectangles */
 
@@ -1175,11 +1267,6 @@ button{
   50% { transform: scale(1.1); filter: brightness(1.5); }
 }
 
-@media (max-width: 768px) {
-  .stencil-grid { flex-direction: column; gap: 60px; }
-  .stencil-num { letter-spacing: -5px; }
-}
-
 .card-pill{
   background:
     radial-gradient(360px 260px at 25% 25%, rgba(255,30,134,.18), transparent 60%),
@@ -1213,6 +1300,70 @@ button{
   gap: 12px;
   justify-items:center;
   margin-top: 14px;
+}
+
+@media (max-width: 768px) {
+  /* 1. Fix the Header & Spacing */
+  .countdown-section {
+    padding: 40px 15px;
+  }
+
+  .countdown-title {
+    margin-bottom: 30px;
+    line-height: 1.2;
+  }
+
+  /* 2. Shrink the Timer Pills so they fit on one row */
+  .timer-container {
+    gap: 8px; /* Tighten gap */
+  }
+
+  .timer-pill {
+    padding: 10px 5px;
+    min-width: 75px; /* Fit 4 across on most phones */
+    border-width: 3px;
+    box-shadow: 4px 4px 0px #000;
+  }
+
+  .time-val {
+    font-size: 2rem; /* Significantly smaller */
+    -webkit-text-stroke: 1px #000;
+  }
+
+  .time-label {
+    font-size: 0.7rem;
+  }
+
+  .timer-separator {
+    font-size: 1.5rem;
+    margin-top: -10px;
+  }
+
+  /* 3. Manage the massive Stencil Numbers */
+  .stencil-num {
+    font-size: 5rem; /* Massive 15vw is too much for vertical phones */
+    letter-spacing: -4px;
+    text-shadow: 6px 6px 0px #000;
+  }
+
+  /* 4. Optimize the Main CTA Button for thumbs */
+  .main-cta-btn {
+    width: 100%; /* Full width button is easier to hit */
+    max-width: 320px;
+    font-size: 1.4rem;
+    padding: 18px 20px;
+    transform: rotate(0deg); /* Straighten for better alignment */
+  }
+
+  .main-cta-btn:hover {
+    transform: translateY(2px); /* Keep it simple */
+  }
+
+  /* 5. Adjust the Card Pill Grid */
+  .timer {
+    grid-template-columns: repeat(2, 1fr); /* 2x2 grid instead of 4x1 */
+    gap: 15px;
+  }
 }
 
 .tile{
@@ -1445,6 +1596,65 @@ button{
   /* Give it a slight tilt to keep the energy high */
 }
 
+@media (max-width: 768px) {
+  .sponsors-container {
+    flex-direction: column; /* Stack panels vertically */
+    height: auto;           /* Let the content define the height */
+    gap: 15px;
+  }
+
+  .sponsor-panel {
+    flex: none;             /* Disable the horizontal flex growth */
+    width: 100%;
+    min-height: 60px;       /* The "closed" height on mobile */
+    flex-direction: column; /* Content flows top-to-bottom */
+    transition: all 0.4s ease;
+  }
+
+  /* Adjust the label to be horizontal on mobile */
+  .vertical-label {
+    writing-mode: horizontal-tb; /* Normal reading mode */
+    transform: rotate(0deg);     /* Remove the 180deg flip */
+    width: 100%;
+    min-height: 60px;
+    padding: 0 20px;
+    justify-content: flex-start; /* Align text to the left */
+    font-size: 1.3rem;
+  }
+
+  /* Expanded state for mobile */
+  .sponsor-panel.active {
+    flex: none; 
+    min-height: 450px; /* Expand downwards */
+  }
+
+  .content-flex {
+    flex-direction: column; /* Stack image and text */
+    padding-bottom: 20px;
+  }
+
+  .image-box {
+    width: 100%;            /* Image takes full width of the card */
+    max-width: none;
+    aspect-ratio: 16 / 9;   /* Wider aspect ratio looks better on mobile */
+  }
+
+  .panel-content {
+    padding: 15px;
+  }
+
+  .text-box h2 {
+    font-size: 1.5rem;
+    margin-top: 15px;
+  }
+
+  /* Add a "plus" or "arrow" indicator hint if you can, 
+     but for now, we'll use a small shadow change */
+  .sponsor-panel:not(.active) .panel-content {
+    display: none; /* Hide content entirely when closed to save space */
+  }
+}
+
 .about-us {
   background-color: #f21197; /* Your Pink */
   padding: 20px 20px;
@@ -1667,7 +1877,23 @@ button{
   max-width: 1200px;
   margin: 0 auto;
 }
+/* Responsive adjustments for the steps section */
+@media (max-width: 768px) {
+  .steps-section {
+    padding: 60px 20px; /* Reduce large vertical padding for mobile */
+  }
 
+  .steps-container {
+    flex-direction: column; /* Stack steps vertically */
+    align-items: center;    /* Center the steps */
+    gap: 30px;              /* Slightly tighten the gap */
+  }
+
+  .step-item {
+    width: 100%;            /* Ensure items take full width */
+    max-width: 400px;       /* Keep items from getting too wide on tablets */
+  }
+}
 .step-card {
   flex: 1;
   padding: 60px 30px;
@@ -1816,32 +2042,6 @@ button{
 
 .page-content{
   width:100%;
-}
-
-@media (max-width: 900px){
-  .feature-grid{ grid-template-columns: 1fr; }
-  .feature-image{ height: 200px; }
-  .prize-grid{ grid-template-columns: 1fr; }
-  .prize.grand{ grid-column: auto; }
-  .timer{ grid-template-columns: 1fr 1fr; }
-}
-
-@media (max-width: 520px){
-  .pad-y{ padding-top: 42px; padding-bottom: 42px; }
-  .header-inner{ grid-template-columns: 1fr; justify-items:center; }
-  .nav-links{ gap: 10px; }
-  .nav-link{ padding: 9px 10px; }
-  .footer-inner{ grid-template-columns: 1fr; justify-items:center; }
-  .brand-text{ text-align:center; }
-  .card-pill{ border-radius: 30px; }
-}
-
-@media (prefers-reduced-motion: reduce){
-  *{
-    animation:none !important;
-    transition:none !important;
-    scroll-behavior:auto !important;
-  }
 }
 
 /* Full screen dimming effect */
@@ -2080,7 +2280,7 @@ height:auto;
 
 .login-label {
   font-weight: 500;
-  font-size: 1.2rem;
+  font-size: 1.5rem;
   color: #03593f;
    font-family: 'Hobo';
 }
@@ -2268,7 +2468,7 @@ border: 8px solid #b4b4b4;
 .form-label {
   color: #03593f;
   margin-left: 10px;
-  font-size: 18px;
+  font-size: 22px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
@@ -2436,6 +2636,7 @@ border: 8px solid #b4b4b4;
 .checkbox-label {
   cursor: pointer;
   line-height: 1.4;
+  font-size: 18px;
 }
 
 .checkbox-group.error .checkbox-label {
@@ -2443,7 +2644,7 @@ border: 8px solid #b4b4b4;
 }
 
 .helper-text {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: #03593f;
   margin-top: -1rem;
   margin-bottom: 1.25rem;
@@ -2457,6 +2658,80 @@ border: 8px solid #b4b4b4;
   margin-top: 0.3rem;
   display: block;
   min-height: 1.2em;
+}
+
+@media (max-width: 768px) {
+  /* 1. RESET THE MAIN WRAPPERS */
+  .register-container {
+    padding: 1rem !important;
+    display: block !important; /* Remove flex/grid that keeps items side-by-side */
+  }
+
+  .register-wrapper {
+    display: flex !important;
+    flex-direction: column !important;
+    width: 100% !important;
+    gap: 20px;
+  }
+
+  /* 2. FIX THE OVERFLOWING HEADER IMAGE/TEXT */
+  /* Target the 'Scratch & Win' area */
+  .register-form-section::before, 
+  .scratch-header-area { 
+    background-size: contain !important;
+    width: 100% !important;
+    left: 0 !important;
+    position: relative !important; /* Stop absolute positioning from breaking layout */
+  }
+
+  /* 3. FIX THE FORM ROWS (First Name/Last Name) */
+  .form-row {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 10px !important;
+  }
+
+  /* Force every input to be 100% width so they don't overlap */
+  .form-group, .form-input {
+    width: 100% !important;
+  }
+
+  /* 4. FIX THE PRIZE BOX (image_bbbc93.png issue) */
+  .prize-section {
+    width: 100% !important;
+    max-width: none !important;
+    margin: 20px 0 !important;
+    transform: none !important; /* Remove any tilts that cause side-scrolling */
+  }
+
+  .ticket-amount {
+    font-size: 2.5rem !important; /* Shrink '10,000' so it stays in the box */
+  }
+
+  /* 5. FIX THE PARTNERS BAR (Lime Green Bar) */
+  .official-partners-section {
+    flex-direction: column !important;
+    height: auto !important;
+    padding: 15px !important;
+    text-align: center;
+  }
+
+  .partners-list {
+    display: block !important;
+    font-size: 0.9rem;
+  }
+
+  /* 6. CLEAN UP THE SITE HEADER */
+  .site-header {
+    flex-direction: column !important;
+    align-items: center !important;
+    padding: 10px !important;
+  }
+
+  .site-nav {
+    gap: 10px !important;
+    margin-top: 10px;
+  }
 }
 .prize-section {
   width: 100%;
@@ -3155,63 +3430,6 @@ border: 8px solid #b4b4b4;
   text-decoration: underline;
 }
 
-@media (max-width: 768px) {
-  .site-header {
-    padding: 1rem 1.5rem;
-  }
-
-  .register-wrapper {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .prize-section {
-    display: none;
-  }
-
-  .form-row {
-    grid-template-columns: 1fr;
-    gap: 0;
-    margin-bottom: 0;
-  }
-
-  .form-row .form-group {
-    margin-bottom: 1.25rem;
-  }
-
-  .site-footer {
-    padding: 2rem 1.5rem 1.5rem;
-  }
-
-  .footer-links {
-    gap: 2rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .register-container {
-    padding: 1rem;
-  }
-
-  .register-form-section {
-    padding: 1.5rem;
-  }
-
-  .login-box {
-    padding: 2rem 1.5rem;
-  }
-
-  .login-title {
-    font-size: 2rem;
-  }
-
-  .form-input,
-  .login-input {
-    font-size: 16px;
-    padding: 0.7rem 0.85rem;
-  }
-}
-
 @keyframes shake-67 {
   0% { transform: rotateZ(0deg) translateY(0); }
   10% { transform: rotateZ(-10deg) translateY(-30px); }
@@ -3829,20 +4047,6 @@ border: 8px solid #b4b4b4;
   font-weight: 700;
 }
 
-/* Mobile tweaks */
-@media (max-width: 520px){
-  .bm-card{
-    border-width: 3px;
-    border-radius: 16px;
-    box-shadow: 7px 7px 0 rgba(0,0,0,0.12);
-  }
-  .bm-timeBox{
-    width: 74px;
-    height: 58px;
-    font-size: 20px;
-  }
-}
-
 /* ==== Contest page — ticket banner + grid layout ==== */
 .contest-banner {
   width: 100%;
@@ -4170,9 +4374,6 @@ border: 8px solid #b4b4b4;
   font-family: 'Arial Black', sans-serif;
 }
 
-@media (max-width: 820px) {
-  .contest-grid { grid-template-columns: 1fr; }
-}
 /* ==== Lose Page — Upgraded Layout ==== */
 .lose-page {
   display: flex;
