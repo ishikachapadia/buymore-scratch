@@ -1,16 +1,36 @@
-# React + Vite
+# Scratch & Win — Interactive Scratch Ticket Interface
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+An interactive scratch-to-reveal campaign interface, built as a front-end project by Ishika Chapadia.
 
-Currently, two official plugins are available:
+Portfolio case study: https://ishicha.ct.ws
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## About
+A digital take on a scratch ticket: the user scratches away a covering layer to reveal a prize/result underneath. Built to explore canvas-based interaction, touch/mouse handling, and playful motion design in a responsive interface.
 
-## React Compiler
+## Tech
+- React + Vite
+- JavaScript
+- CSS (responsive UI)
+- Canvas — scratch / masking layer
+- Motion design for reveal feedback
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Features
+- Scratch-to-reveal mechanic using canvas masking
+- Works with mouse and touch input
+- Responsive layout for mobile and desktop
+- Clear win/result reveal state
 
-## Expanding the ESLint configuration
+## Run locally
+```bash
+npm install
+npm run dev
+```
+Then open the local URL Vite prints.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Status
+Part of my portfolio — see more work at https://ishicha.ct.ws
+Live demo is being re-hosted; the portfolio case study above is the current reference.
+
+## Author
+Ishika Chapadia — Junior Front-End Developer, Oshawa, Ontario
+GitHub: https://github.com/ishikachapadia
